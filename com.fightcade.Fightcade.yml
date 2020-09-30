@@ -71,9 +71,6 @@ modules:
       - ln -s /var/data/ROMs/ggpofba emulator/ggpofba/ROMs
       - rmdir emulator/snes9x/ROMs
       - ln -s /var/data/ROMs/snes9x emulator/snes9x/ROMs
-      # Update Fightcade's builtin ROMs dir
-      - rm -rf ROMs/
-      - ln -s /var/data/ROMs ROMs
       # Log files Fightcade expects to be able to write to
       - ln -s /logs/fcade-errors.log emulator/fcade-errors.log
       - ln -s /var/data/logs/fcade.log emulator/fcade.log
@@ -99,6 +96,9 @@ modules:
         dest-filename: wine.sh
         commands:
           - /app/bin/wine "$@"
+      # Temporary patch to open XDG_DATA_HOME/ROMs from GUI
+      - type: patch
+        path: fightcade-flatpak-romsdir.patch
 
   - name: fightcade-extra
     buildsystem: simple
