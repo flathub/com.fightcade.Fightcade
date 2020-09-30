@@ -15,15 +15,15 @@
   </description>
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/Pobega/com.fightcade.Fightcade/master/screenshots/landing-page.png</image>
+      <image><https://raw.githubusercontent.com/flathub/com.fightcade.Fightcade/master/screenshots/landing-page.png/image>
       <caption>Fightcade landing page</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/Pobega/com.fightcade.Fightcade/master/screenshots/game-lobby.png</image>
+      <image>https://raw.githubusercontent.com/flathub/com.fightcade.Fightcade/master/screenshots/game-lobby.png</image>
       <caption>Game lobby</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/Pobega/com.fightcade.Fightcade/master/screenshots/spectating.png</image>
+      <image>https://raw.githubusercontent.com/flathub/com.fightcade.Fightcade/master/screenshots/spectating.png</image>
       <caption>Spectating a game</caption>
     </screenshot>
   </screenshots>
