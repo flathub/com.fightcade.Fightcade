@@ -28,6 +28,18 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release date="2020-10-04" version="2.8.0-1">
+      <p>Small improvements to Flatpak integration</p>
+      <ul>
+        <li>
+          Patches the Electron frontend to fix 'Open ROMs Dir'
+          <i>(Note: due to an upstream bug this doesn't work on xdg-desktop 1.8.0~1.8.2)</i>
+        </li>
+        <li>
+          Fix FBNeo configs not persisting between emulator sessions
+        </li>
+      </ul>
+    </release>
     <release date="2020-09-10" version="2.8.0"/>
   </releases>
   <content_rating type="oars-1.1">
