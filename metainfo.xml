@@ -28,7 +28,7 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release date="2020-10-04" version="2.8.0-1">
+    <release date="2020-10-04" version="2.0.82-1">
       <p>Small improvements to Flatpak integration</p>
       <ul>
         <li>
@@ -40,7 +40,7 @@
         </li>
       </ul>
     </release>
-    <release date="2020-09-10" version="2.8.0"/>
+    <release date="2020-09-10" version="2.0.82"/>
   </releases>
   <content_rating type="oars-1.1">
     <content_attribute id="violence-cartoon">intense</content_attribute>
