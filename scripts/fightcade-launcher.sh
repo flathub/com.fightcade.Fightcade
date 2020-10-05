@@ -22,8 +22,8 @@ mkdir -p ${DATADIR}/ROMs/ggpofba
 mkdir -p ${DATADIR}/ROMs/snes9x
 
 # Emulator config directory
-mkdir -p ${DATADIR}/config
-cp -n /app/fightcade/Fightcade/emulator/fbneo/config/fcadefbneo.default.ini ${DATADIR}/config/fcadefbneo.ini
+mkdir -p ${DATADIR}/config/fcadefbneo
+cp -n /app/fightcade/Fightcade/emulator/fbneo/config/fcadefbneo.default.ini ${DATADIR}/config/fcadefbneo/fcadefbneo.ini
 
 # Boot Fightcade frontend
 /app/bin/zypak-wrapper /app/fightcade/Fightcade/fc2-electron/fc2-electron
