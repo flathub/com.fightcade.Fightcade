@@ -191,5 +191,5 @@ modules:
       - UPDATE_DESKTOP_DATABASE=/bin/true
     sources:
       - type: archive
-        url: https://dl.winehq.org/wine/source/5.0/wine-5.0.1.tar.xz
-        sha256: 12b13405c4bc0d6e1a3991c0b0542562669c9b7d8307f11ff75aa17378345894
+        url: https://dl.winehq.org/wine/source/5.0/wine-5.0.2.tar.xz
+        sha256: c2c284f470874b35228327c3972bc29c3a9d8d98abd71dbf81c288b8642becbc
