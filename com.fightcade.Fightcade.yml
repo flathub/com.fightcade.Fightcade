@@ -85,9 +85,9 @@ modules:
       - cp -R * /app/fightcade/Fightcade
     sources:
       - type: archive
-        url: https://web.fightcade.com/download/Fightcade-linux-v2.0.94.tar.gz
-        sha256: dd8eac9a424460528a4e0027d0be494b4c7312e928758f53ccc252454e259508
-        size: 142683463
+        url: https://web.fightcade.com/download/Fightcade-linux-v2.0.95.tar.gz
+        sha256: e4e0608bf9ae36ccd9232b842b97fbac555412d93852f63c9f5e0c8892b37677
+        size: 143576141
         x-checker-data:
           type: html
           url: https://web.fightcade.com/download/update.json
