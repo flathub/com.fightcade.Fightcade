@@ -84,6 +84,11 @@ modules:
       # Symlink emulator configs to writable directories
       - rm -rf emulator/fbneo/config
       - ln -s /var/data/config/fcadefbneo emulator/fbneo/config
+      - ln -s /var/data/config/snes9x/fcadesnes9x.conf emulator/snes9x/fcadesnes9x.conf
+      # Snes9x fix
+      - ln -s /var/data/config/snes9x/Valid.Ext emulator/snes9x/Valid.Ext
+      - ln -s /var/data/config/snes9x/stdout.txt emulator/snes9x/stdout.txt
+      - ln -s /var/data/config/snes9x/stderr.txt emulator/snes9x/stderr.txt
       # Wine wrapper
       - install -Dm755 wine.sh /app/fightcade/Resources/wine.sh
       - cp -R * /app/fightcade/Fightcade
