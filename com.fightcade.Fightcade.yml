@@ -133,6 +133,23 @@ modules:
       - type: file
         path: metainfo.xml
 
+  - name: faudio32
+    buildsystem: cmake-ninja
+    build-options:
+      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
+      ldflags: -L/app/lib32
+      prepend-path: /usr/lib/sdk/toolchain-i386/bin
+      env:
+        CC: i686-unknown-linux-gnu-gcc
+        CXX: i686-unknown-linux-gnu-g++
+      libdir: /app/lib32
+    config-opts:
+      - -DGSTREAMER=ON
+    sources:
+      - type: archive
+        url: https://github.com/FNA-XNA/FAudio/archive/20.12.tar.gz
+        sha256: d5a1656ec79cd2878dddabc07d7f7848c11844595c76033aed929b10d922c009
+
   - name: wine32
     builddir: true
     build-options:
@@ -165,6 +182,7 @@ modules:
       - --without-v4l
       - --with-dbus
       - --without-oss
+      - --with-faudio
     cleanup:
       - '*.a'
       - '*.la'
