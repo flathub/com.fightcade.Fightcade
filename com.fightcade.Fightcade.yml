@@ -63,7 +63,11 @@ modules:
       - mkdir -p /app/fightcade/Fightcade
       - mkdir -p /app/fightcade/Resources
       # Symlink jc2json dir
-      - ln -s /var/data/fc2json emulator/fc2json
+      - ln -s /var/data/fbneo_roms.json emulator/fbneo_roms.json 
+      - ln -s /var/data/snes9x_roms.json emulator/snes9x_roms.json 
+      - ln -s /var/data/flycast_roms.json emulator/flycast_roms.json 
+      - ln -s /var/data/nulldc_roms.json emulator/nulldc_roms.json 
+      - ln -s /var/data/fc1_roms.json emulator/fc1_roms.json 
       # Symlink the ROMs folder to persistent directories
       - rmdir emulator/fbneo/ROMs
       - ln -s /var/data/ROMs/fbneo emulator/fbneo/ROMs
