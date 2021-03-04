@@ -5,9 +5,6 @@ DATADIR=/var/data
 # Silently create/update Wine prefix
 WINEDEBUG=-all DISPLAY=:invalid wineboot -u
 
-# Create config files
-mkdir -p ${DATADIR}/fc2json
-
 # Log file Fightcade expects to be able to write to
 mkdir -p /var/data/logs
 touch ${DATADIR}/logs/fcade-errors.log
