@@ -63,11 +63,11 @@ modules:
       - mkdir -p /app/fightcade/Fightcade
       - mkdir -p /app/fightcade/Resources
       # Symlink jc2json dir
-      - ln -s /var/data/fbneo_roms.json emulator/fbneo_roms.json 
-      - ln -s /var/data/snes9x_roms.json emulator/snes9x_roms.json 
-      - ln -s /var/data/flycast_roms.json emulator/flycast_roms.json 
-      - ln -s /var/data/nulldc_roms.json emulator/nulldc_roms.json 
-      - ln -s /var/data/fc1_roms.json emulator/fc1_roms.json 
+      - ln -s /var/data/fbneo_roms.json emulator/fbneo_roms.json
+      - ln -s /var/data/snes9x_roms.json emulator/snes9x_roms.json
+      - ln -s /var/data/flycast_roms.json emulator/flycast_roms.json
+      - ln -s /var/data/nulldc_roms.json emulator/nulldc_roms.json
+      - ln -s /var/data/fc1_roms.json emulator/fc1_roms.json
       # Symlink the ROMs folder to persistent directories
       - rmdir emulator/fbneo/ROMs
       - ln -s /var/data/ROMs/fbneo emulator/fbneo/ROMs
@@ -89,8 +89,8 @@ modules:
       - cp -R * /app/fightcade/Fightcade
     sources:
       - type: archive
-        url: https://web.fightcade.com/download/Fightcade-linux-v2.0.96.tar.gz
-        sha256: b0dbcf73c96468536644f101bdce892ae4b5a072d2367b2f190aad330c3c2c8d
+        url: https://web.fightcade.com/download/Fightcade-linux-v2.0.97.tar.gz
+        sha256: 73f24cbdebd12399980fe6683de6323819e0cab4de8eaa63e147ece00aa22f1a
         x-checker-data:
           type: html
           url: https://web.fightcade.com/download/update.json
