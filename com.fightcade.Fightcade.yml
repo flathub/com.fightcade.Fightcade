@@ -141,6 +141,8 @@ modules:
         CC: i686-unknown-linux-gnu-gcc
         CXX: i686-unknown-linux-gnu-g++
       libdir: /app/lib32
+      strip: true
+      no-debuginfo: true
     config-opts:
       - -DGSTREAMER=ON
     sources:
@@ -148,66 +150,111 @@ modules:
         url: https://github.com/FNA-XNA/FAudio/archive/20.12.tar.gz
         sha256: d5a1656ec79cd2878dddabc07d7f7848c11844595c76033aed929b10d922c009
 
-  - name: wine32
+  - name: faudio64
+    buildsystem: cmake-ninja
+    build-options:
+      strip: true
+      no-debuginfo: true
+    config-opts:
+      - -DGSTREAMER=ON
+    sources:
+      - type: archive
+        url: https://github.com/FNA-XNA/FAudio/archive/20.12.tar.gz
+        sha256: d5a1656ec79cd2878dddabc07d7f7848c11844595c76033aed929b10d922c009
+
+  - name: wine-wow64
     builddir: true
     build-options:
+      make-args: -j5
       prefix: /app
       prepend-path: /app/bin
-      ldflags: -L/app/lib32
+      ldflags: -L/app/lib64 -L/app/lib32
       append-path: /usr/lib/sdk/toolchain-i386/bin
       env:
         CC: i686-unknown-linux-gnu-gcc
         CXX: i686-unknown-linux-gnu-g++
       libdir: /app/lib32
       strip: true
-    config-opts:
-      - --disable-win16
-      - --disable-tests
-      - --with-x
-      - --with-pulse
-      - --without-cups
-      - --without-curses
-      - --without-capi
-      - --without-glu
-      - --without-gphoto
-      - --without-gsm
-      - --without-hal
-      - --without-ldap
-      - --without-netapi
-      - --without-opencl
-      - --without-pcap
-      - --without-udev
-      - --without-v4l
-      - --with-dbus
-      - --without-oss
-      - --with-faudio
-    cleanup:
-      - '*.a'
-      - '*.la'
-      - /include
-      - /lib/pkgconfig
-      - /lib32/pkgconfig
-      - /lib/cmake
-      - /lib32/cmake
-      - /share/man
-
-      - /bin/function_grep.pl
-      - /bin/widl
-      - /bin/winebuild
-      - /bin/winecpp
-      - /bin/winedump
-      - /bin/wineg++
-      - /bin/winegcc
-      - /bin/winemaker
-      - /bin/wmc
-      - /bin/wrc
-
-      - /lib/wine/*.def
-      - /lib32/wine/*.def
+      no-debuginfo: true
     make-install-args:
       - LDCONFIG=/bin/true
       - STRIP=/bin/true
       - UPDATE_DESKTOP_DATABASE=/bin/true
+    buildsystem: simple
+    build-commands:
+    # 1. Build wine64
+    - export CC=x86_64-unknown-linux-gnu-gcc  &&
+      export CXX=x86_64-unknown-linux-gnu-g++ &&
+      mkdir wine64-build && cd wine64-build   &&
+      ../configure
+      --prefix="/app"
+      --disable-win16
+      --enable-shared
+      --disable-static
+      --disable-tests
+      --with-x
+      --without-cups
+      --without-curses
+      --without-capi
+      --without-glu
+      --without-gphoto
+      --without-gsm
+      --without-hal
+      --without-ldap
+      --with-faudio
+      --without-netapi
+      --enable-win64 &&
+      make -j5
+    # 2. Build wine32 twice
+    - export CC=i686-unknown-linux-gnu-gcc  &&
+      export CXX=i686-unknown-linux-gnu-g++ &&
+      mkdir wine32-tools && cd wine32-tools &&
+      ../configure
+      --prefix="/app"
+      --disable-win16
+      --enable-shared
+      --disable-static
+      --disable-tests
+      --with-x
+      --without-cups
+      --without-curses
+      --without-capi
+      --without-glu
+      --without-gphoto
+      --without-gsm
+      --without-hal
+      --without-ldap
+      --with-faudio
+      --without-netapi &&
+      make -j5
+    # 3. Build 32bit second time and
+    # install 32 bit and 64 bit wine
+    - export CC=i686-unknown-linux-gnu-gcc  &&
+      export CXX=i686-unknown-linux-gnu-g++ &&
+      mkdir wine32-combo && cd wine32-combo &&
+      ../configure
+      --with-wine64=../wine64-build
+      --with-wine-tools=../wine32-tools
+      --prefix="/app"
+      --disable-win16
+      --enable-shared
+      --disable-static
+      --disable-tests
+      --with-x
+      --without-cups
+      --without-curses
+      --without-capi
+      --without-glu
+      --without-gphoto
+      --without-gsm
+      --without-hal
+      --without-ldap
+      --with-faudio
+      --without-netapi   &&
+      make -j5           &&
+      make install       &&
+      cd ../wine64-build &&
+      make install
     sources:
       - type: archive
         url: https://dl.winehq.org/wine/source/5.0/wine-5.0.2.tar.xz
