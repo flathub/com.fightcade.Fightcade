@@ -3,7 +3,7 @@
 DATADIR=/var/data
 
 # Silently create/update Wine prefix
-WINEDEBUG=-all DISPLAY=:invalid wineboot -u
+WINEPREFIX=~/.wine64 WINEDEBUG=-all DISPLAY=:invalid wineboot -u
 
 # Log file Fightcade expects to be able to write to
 mkdir -p /var/data/logs
