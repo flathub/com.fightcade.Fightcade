@@ -2,6 +2,12 @@
 
 DATADIR=/var/data
 
+# Tell the user that the wine prefix may take some time to create.
+# On first boot it can seem like the application is silently hanging since
+# on slower systems creating the wine prefix can take upwards of 2
+# minutes (tested on a 2-core Silverblue VM)
+echo "Creating or updating wine prefix (~/.wine64), this may take a minute..."
+
 # Silently create/update Wine prefix
 WINEPREFIX=~/.wine64 WINEDEBUG=-all DISPLAY=:invalid wineboot -u
 
