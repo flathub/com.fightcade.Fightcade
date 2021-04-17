@@ -32,7 +32,7 @@ cp -n /app/fightcade/Fightcade/emulator/fbneo/config/fcadefbneo.default.ini ${DA
 mkdir -p ${DATADIR}/config/snes9x
 mkdir -p ${DATADIR}/config/snes9x/Saves
 cp -n /app/fightcade/Fightcade/emulator/snes9x/fcadesnes9x.default.conf ${DATADIR}/config/snes9x/fcadesnes9x.conf
-touch ${DATADIR}/config/snes9x/Valid.Ext
+echo "N" > ${DATADIR}/config/snes9x/Valid.Ext
 touch ${DATADIR}/config/snes9x/stdout.txt
 touch ${DATADIR}/config/snes9x/stderr.txt
 
