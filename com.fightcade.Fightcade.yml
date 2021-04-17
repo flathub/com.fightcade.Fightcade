@@ -76,6 +76,8 @@ modules:
       - ln -s /var/data/ROMs/ggpofba emulator/ggpofba/ROMs
       - rmdir emulator/snes9x/ROMs
       - ln -s /var/data/ROMs/snes9x emulator/snes9x/ROMs
+      - rmdir emulator/flycast/ROMs
+      - ln -s /var/data/ROMs/flycast emulator/flycast/ROMs
       # Log files Fightcade expects to be able to write to
       - ln -s /var/data/logs/fcade-errors.log emulator/fcade-errors.log
       - ln -s /var/data/logs/fcade.log emulator/fcade.log
@@ -83,6 +85,7 @@ modules:
       - ln -s /var/data/logs/fcade.log.2 emulator/fcade.log.3
       - ln -s /var/data/logs/fcade.log.3 emulator/fcade.log.2
       # Symlink emulator configs to writable directories
+      # FBNeo fixes
       - rm -rf emulator/fbneo/config
       - ln -s /var/data/config/fcadefbneo emulator/fbneo/config
       - ln -s /var/data/config/snes9x/fcadesnes9x.conf emulator/snes9x/fcadesnes9x.conf
@@ -92,6 +95,8 @@ modules:
       - ln -s /var/data/config/snes9x/stderr.txt emulator/snes9x/stderr.txt
       - rm -r emulator/snes9x/Saves
       - ln -s /var/data/config/snes9x/Saves emulator/snes9x/Saves
+      # Flycast fixes
+      - ln -s /var/data/config/flycast/emu.cfg emulator/flycast/emu.cfg
       # Wine wrapper
       - install -Dm755 wine.sh /app/fightcade/Resources/wine.sh
       - cp -R * /app/fightcade/Fightcade
