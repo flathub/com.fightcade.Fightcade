@@ -24,12 +24,13 @@ mkdir -p ${DATADIR}/ROMs/fbneo
 mkdir -p ${DATADIR}/ROMs/ggpofba
 mkdir -p ${DATADIR}/ROMs/snes9x
 
-# Emulator config directories
+# Emulator writable directories
 # FBNeo
 mkdir -p ${DATADIR}/config/fcadefbneo
 cp -n /app/fightcade/Fightcade/emulator/fbneo/config/fcadefbneo.default.ini ${DATADIR}/config/fcadefbneo/fcadefbneo.ini
 # Snes9x
 mkdir -p ${DATADIR}/config/snes9x
+mkdir -p ${DATADIR}/config/snes9x/Saves
 cp -n /app/fightcade/Fightcade/emulator/snes9x/fcadesnes9x.default.conf ${DATADIR}/config/snes9x/fcadesnes9x.conf
 touch ${DATADIR}/config/snes9x/Valid.Ext
 touch ${DATADIR}/config/snes9x/stdout.txt
