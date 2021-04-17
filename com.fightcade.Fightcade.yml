@@ -76,7 +76,7 @@ modules:
       - rmdir emulator/snes9x/ROMs
       - ln -s /var/data/ROMs/snes9x emulator/snes9x/ROMs
       # Log files Fightcade expects to be able to write to
-      - ln -s /logs/fcade-errors.log emulator/fcade-errors.log
+      - ln -s /var/data/logs/fcade-errors.log emulator/fcade-errors.log
       - ln -s /var/data/logs/fcade.log emulator/fcade.log
       - ln -s /var/data/logs/fcade.log.1 emulator/fcade.log.1
       - ln -s /var/data/logs/fcade.log.2 emulator/fcade.log.3
