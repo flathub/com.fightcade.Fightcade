@@ -38,6 +38,7 @@ touch ${DATADIR}/config/snes9x/stdout.txt
 touch ${DATADIR}/config/snes9x/stderr.txt
 # Flycast
 mkdir -p ${DATADIR}/config/flycast
+mkdir -p ${DATADIR}/config/flycast/mappings
 touch ${DATADIR}/config/flycast/emu.cfg
 
 # Boot Fightcade frontend
