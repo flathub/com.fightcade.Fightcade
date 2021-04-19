@@ -100,9 +100,6 @@ modules:
         dest-filename: wine.sh
         commands:
           - /app/bin/wine "$@"
-      # Temporary patch to open XDG_DATA_HOME/ROMs from GUI
-      - type: patch
-        path: fightcade-flatpak-romsdir.patch
 
   - name: fightcade-extra
     buildsystem: simple
