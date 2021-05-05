@@ -131,6 +131,22 @@ modules:
       - type: file
         path: metainfo.xml
 
+  - name: libzip
+    buildsystem: cmake-ninja
+    config-opts:
+    - "-DCMAKE_BUILD_TYPE=Release"
+    - "-DCMAKE_INSTALL_LIBDIR=lib"
+    cleanup:
+    - "/include"
+    - "/bin"
+    - "/share"
+    - "/lib/pkgconfig"
+    - "/lib/*.la"
+    sources:
+    - type: archive
+      url: https://libzip.org/download/libzip-1.7.3.tar.xz
+      sha256: a60473ffdb7b4260c08bfa19c2ccea0438edac11193c3afbbb1f17fbcf6c6132
+
   - name: faudio32
     buildsystem: cmake-ninja
     build-options:
