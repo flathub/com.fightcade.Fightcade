@@ -293,6 +293,29 @@ modules:
       make install       &&
       cd ../wine64-build &&
       make install
+    cleanup:
+      - '*.a'
+      - '*.la'
+      - /include
+      - /lib/pkgconfig
+      - /lib32/pkgconfig
+      - /lib/cmake
+      - /lib32/cmake
+      - /share/man
+
+      - /bin/function_grep.pl
+      - /bin/widl
+      - /bin/winebuild
+      - /bin/winecpp
+      - /bin/winedump
+      - /bin/wineg++
+      - /bin/winegcc
+      - /bin/winemaker
+      - /bin/wmc
+      - /bin/wrc
+
+      - /lib/wine/*.def
+      - /lib32/wine/*.def
     sources:
       - type: archive
         url: https://dl.winehq.org/wine/source/5.0/wine-5.0.2.tar.xz
