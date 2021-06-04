@@ -22,7 +22,7 @@ add-extensions:
   org.freedesktop.Platform.GL32:
     directory: lib/i386-linux-gnu/GL
     version: '1.4'
-    versions: '20.08;1.4'
+    versions: 20.08;1.4
     subdirectories: true
     no-autodownload: true
     autodelete: false
@@ -103,8 +103,8 @@ modules:
       - cp -R * /app/fightcade/Fightcade
     sources:
       - type: archive
-        url: https://web.fightcade.com/download/Fightcade-linux-v2.1.1.tar.gz
-        sha256: 0888cbf5375e7fa737750fefeec54c87c80bde706d9c28b7957ae01da156a407
+        url: https://web.fightcade.com/download/Fightcade-linux-v2.1.3.tar.gz
+        sha256: 0eb2e89a0c63922b785fab14f53a2286eea8ea5ac4814eee8dfebee5f928e40e
         x-checker-data:
           type: html
           url: https://web.fightcade.com/download/update.json
@@ -151,23 +151,24 @@ modules:
   - name: libcurl-gnutls
     buildsystem: simple
     build-commands:
-      - ARCH_TRIPLE=$(gcc --print-multiarch) && ln -s /usr/lib/${ARCH_TRIPLE}/libcurl.so.4 /app/lib/libcurl-gnutls.so.4
+      - ARCH_TRIPLE=$(gcc --print-multiarch) && ln -s /usr/lib/${ARCH_TRIPLE}/libcurl.so.4
+        /app/lib/libcurl-gnutls.so.4
 
   - name: libzip
     buildsystem: cmake-ninja
     config-opts:
-    - "-DCMAKE_BUILD_TYPE=Release"
-    - "-DCMAKE_INSTALL_LIBDIR=lib"
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_LIBDIR=lib
     cleanup:
-    - "/include"
-    - "/bin"
-    - "/share"
-    - "/lib/pkgconfig"
-    - "/lib/*.la"
+      - /include
+      - /bin
+      - /share
+      - /lib/pkgconfig
+      - /lib/*.la
     sources:
-    - type: archive
-      url: https://libzip.org/download/libzip-1.7.3.tar.xz
-      sha256: a60473ffdb7b4260c08bfa19c2ccea0438edac11193c3afbbb1f17fbcf6c6132
+      - type: archive
+        url: https://libzip.org/download/libzip-1.7.3.tar.xz
+        sha256: a60473ffdb7b4260c08bfa19c2ccea0438edac11193c3afbbb1f17fbcf6c6132
 
   - name: faudio32
     buildsystem: cmake-ninja
@@ -221,78 +222,27 @@ modules:
     buildsystem: simple
     build-commands:
     # 1. Build wine64
-    - export CC=x86_64-unknown-linux-gnu-gcc  &&
-      export CXX=x86_64-unknown-linux-gnu-g++ &&
-      mkdir wine64-build && cd wine64-build   &&
-      ../configure
-      --prefix="/app"
-      --disable-win16
-      --enable-shared
-      --disable-static
-      --disable-tests
-      --with-x
-      --without-cups
-      --without-curses
-      --without-capi
-      --without-glu
-      --without-gphoto
-      --without-gsm
-      --without-hal
-      --without-ldap
-      --with-faudio
-      --without-netapi
-      --enable-win64 &&
-      make -j5
+      - export CC=x86_64-unknown-linux-gnu-gcc  && export CXX=x86_64-unknown-linux-gnu-g++
+        && mkdir wine64-build && cd wine64-build   && ../configure --prefix="/app"
+        --disable-win16 --enable-shared --disable-static --disable-tests --with-x
+        --without-cups --without-curses --without-capi --without-glu --without-gphoto
+        --without-gsm --without-hal --without-ldap --with-faudio --without-netapi
+        --enable-win64 && make -j5
     # 2. Build wine32 twice
-    - export CC=i686-unknown-linux-gnu-gcc  &&
-      export CXX=i686-unknown-linux-gnu-g++ &&
-      mkdir wine32-tools && cd wine32-tools &&
-      ../configure
-      --prefix="/app"
-      --disable-win16
-      --enable-shared
-      --disable-static
-      --disable-tests
-      --with-x
-      --without-cups
-      --without-curses
-      --without-capi
-      --without-glu
-      --without-gphoto
-      --without-gsm
-      --without-hal
-      --without-ldap
-      --with-faudio
-      --without-netapi &&
-      make -j5
+      - export CC=i686-unknown-linux-gnu-gcc  && export CXX=i686-unknown-linux-gnu-g++
+        && mkdir wine32-tools && cd wine32-tools && ../configure --prefix="/app" --disable-win16
+        --enable-shared --disable-static --disable-tests --with-x --without-cups --without-curses
+        --without-capi --without-glu --without-gphoto --without-gsm --without-hal
+        --without-ldap --with-faudio --without-netapi && make -j5
     # 3. Build 32bit second time and
     # install 32 bit and 64 bit wine
-    - export CC=i686-unknown-linux-gnu-gcc  &&
-      export CXX=i686-unknown-linux-gnu-g++ &&
-      mkdir wine32-combo && cd wine32-combo &&
-      ../configure
-      --with-wine64=../wine64-build
-      --with-wine-tools=../wine32-tools
-      --prefix="/app"
-      --disable-win16
-      --enable-shared
-      --disable-static
-      --disable-tests
-      --with-x
-      --without-cups
-      --without-curses
-      --without-capi
-      --without-glu
-      --without-gphoto
-      --without-gsm
-      --without-hal
-      --without-ldap
-      --with-faudio
-      --without-netapi   &&
-      make -j5           &&
-      make install       &&
-      cd ../wine64-build &&
-      make install
+      - export CC=i686-unknown-linux-gnu-gcc  && export CXX=i686-unknown-linux-gnu-g++
+        && mkdir wine32-combo && cd wine32-combo && ../configure --with-wine64=../wine64-build
+        --with-wine-tools=../wine32-tools --prefix="/app" --disable-win16 --enable-shared
+        --disable-static --disable-tests --with-x --without-cups --without-curses
+        --without-capi --without-glu --without-gphoto --without-gsm --without-hal
+        --without-ldap --with-faudio --without-netapi   && make -j5           && make
+        install       && cd ../wine64-build && make install
     cleanup:
       - '*.a'
       - '*.la'
