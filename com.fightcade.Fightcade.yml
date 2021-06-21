@@ -98,6 +98,8 @@ modules:
       # Flycast fixes
       - ln -s /var/data/config/flycast/emu.cfg emulator/flycast/emu.cfg
       - ln -s /var/data/config/flycast/mappings emulator/flycast/mappings
+      - ln -s /var/data/ROMs/flycast/awbios.zip emulator/flycast/data/awbios.zip 
+      - ln -s /var/data/ROMs/flycast/naomi.zip emulator/flycast/data/naomi.zip 
       # Wine wrapper
       - install -Dm755 wine.sh /app/fightcade/Resources/wine.sh
       - cp -R * /app/fightcade/Fightcade
