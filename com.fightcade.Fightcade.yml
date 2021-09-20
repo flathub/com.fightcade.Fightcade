@@ -103,8 +103,8 @@ modules:
       - cp -R * /app/fightcade/Fightcade
     sources:
       - type: archive
-        url: https://web.fightcade.com/download/Fightcade-linux-v2.1.8.tar.gz
-        sha256: e4673fcbf547740da715f86657a6f9a011712203d250371f2241d99e4adda878
+        url: https://web.fightcade.com/download/Fightcade-linux-v2.1.9.tar.gz
+        sha256: 6749bb01034656a6f084bc6d3d08f794798aabd50cf8c496eb8a19064d3589ce
         x-checker-data:
           type: html
           url: https://web.fightcade.com/download/update.json
