@@ -170,6 +170,13 @@ modules:
         url: https://libzip.org/download/libzip-1.7.3.tar.xz
         sha256: a60473ffdb7b4260c08bfa19c2ccea0438edac11193c3afbbb1f17fbcf6c6132
 
+  - name: miniupnpc
+    buildsystem: cmake-ninja
+    sources:
+      - type: archive
+        url: https://miniupnp.tuxfamily.org/files/miniupnpc-2.2.2.tar.gz
+        sha256: 888fb0976ba61518276fe1eda988589c700a3f2a69d71089260d75562afd3687
+
   - name: faudio32
     buildsystem: cmake-ninja
     build-options:
