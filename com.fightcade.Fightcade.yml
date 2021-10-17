@@ -116,13 +116,8 @@ modules:
           url: https://web.fightcade.com/download/update.json
           version-pattern: Fightcade-linux-v([\d.]+).tar.gz
           url-template: https://web.fightcade.com/download/Fightcade-linux-v${version}.tar.gz
-      - type: script
-        dest-filename: wine.sh
-        # Due to switching from 32-bit wine to WoW64, we need to create a 64 bit prefix.
-        # Rather than doing a migration we'll just move to a new ~/.wine64 prefix
-        commands:
-          - export WINEPREFIX=~/.wine64
-          - /app/wine/bin/wine "$@"
+      - type: file
+        path: scripts/wine.sh
 
   - name: fightcade-extra
     buildsystem: simple
