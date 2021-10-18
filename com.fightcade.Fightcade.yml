@@ -34,6 +34,7 @@ add-extensions:
   com.fightcade.Fightcade.Wine:
     directory: wine
     version: stable
+    no-autodownload: false
 
 # Support 32-bit at buildtime
 sdk-extensions:
