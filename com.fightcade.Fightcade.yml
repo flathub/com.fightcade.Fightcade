@@ -34,6 +34,8 @@ add-extensions:
   com.fightcade.Fightcade.Wine:
     directory: wine
     version: stable
+    add-ld-path: lib
+    add-ld-path: lib32
     no-autodownload: false
 
 # Support 32-bit at buildtime
