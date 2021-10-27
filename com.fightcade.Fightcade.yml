@@ -104,7 +104,10 @@ modules:
       - ln -s /var/data/config/snes9x/Saves emulator/snes9x/Saves
       # Flycast fixes
       - ln -s /var/data/config/flycast/emu.cfg emulator/flycast/emu.cfg
+      - rm -rf emulator/flycast/mappings
       - ln -s /var/data/config/flycast/mappings emulator/flycast/mappings
+      - mv emulator/flycast/data emulator/flycast/data_orig
+      - ln -s /var/data/config/flycast/data emulator/flycast/data
       # Wine wrapper
       - install -Dm755 wine.sh /app/fightcade/Resources/wine.sh
       - cp -R * /app/fightcade/Fightcade
