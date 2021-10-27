@@ -8,7 +8,7 @@ END
 )
 
 WINEPATH="/app/wine/bin/wine"
-export WINEPREFIX=~/.wine64
+export WINEPREFIX=~/.wine
 
 if [[ -f ${WINEPATH} ]]; then
 	/app/wine/bin/wine "$@"
