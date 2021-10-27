@@ -38,8 +38,10 @@ touch ${DATADIR}/config/snes9x/stdout.txt
 touch ${DATADIR}/config/snes9x/stderr.txt
 # Flycast
 mkdir -p ${DATADIR}/config/flycast
-mkdir -p ${DATADIR}/config/flycast/mappings
 touch ${DATADIR}/config/flycast/emu.cfg
+mkdir -p ${DATADIR}/config/flycast/mappings
+mkdir -p ${DATADIR}/config/flycast/data
+cp -R /app/fightcade/Fightcade/emulator/flycast/data_orig/* ${DATADIR}/config/flycast/data
 
 # Boot Fightcade frontend
 /app/bin/zypak-wrapper /app/fightcade/Fightcade/fc2-electron/fc2-electron
