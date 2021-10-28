@@ -4,11 +4,12 @@ PARAM=${1+"$@"}
 
 export WINEDEBUG=-all
 
-echo "======" >> /var/data/fcade.log
-echo ${PARAM} >> /var/data/fcade_output
-echo "======" >> /var/data/fcade_output
+# log the command being run
+echo "======
+${PARAM}
+======" >> /var/data/fcade.log
 
-# split 'fcade://play/ssfxj2' into an array split by '/'
+# separate 'fcade://play/ssfxj2' into an array split by '/'
 IFS='/' read -r -a fcadecmd <<< "$PARAM"
 
 # If we're doing a checkrom we call frm manually, otherwise
