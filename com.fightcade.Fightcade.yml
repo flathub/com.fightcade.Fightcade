@@ -177,12 +177,26 @@ modules:
         sha256: a60473ffdb7b4260c08bfa19c2ccea0438edac11193c3afbbb1f17fbcf6c6132
 
   # Flycast native dep
-  - name: miniupnpc
+  - name: libminiupnpc
     buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DUPNPC_BUILD_SHARED=true
+      - -DUPNPC_BUILD_STATIC=false
+      - -DUPNPC_BUILD_TESTS=false
+      - -DUPNPC_BUILD_SAMPLE=false
+      - -DUPNPC_NO_INSTALL=true
+    # For some reason, CMake's install asks for files that do not exist.
+    # So instead we'll install only the parts we care about ourselves.
+    no-make-install: true
+    post-install:
+      - install -m0644 -t /app/lib libminiupnpc.so.2.2.3
+      - install -m0644 -t /app/lib libminiupnpc.so.17
+      - install -m0644 -t /app/lib libminiupnpc.so
     sources:
       - type: archive
-        url: https://miniupnp.tuxfamily.org/files/miniupnpc-2.2.2.tar.gz
-        sha256: 888fb0976ba61518276fe1eda988589c700a3f2a69d71089260d75562afd3687
+        url: http://miniupnp.free.fr/files/miniupnpc-2.2.3.tar.gz
+        sha256: dce41b4a4f08521c53a0ab163ad2007d18b5e1aa173ea5803bd47a1be3159c24
 
   - name: faudio32
     buildsystem: cmake-ninja
