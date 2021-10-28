@@ -6,10 +6,10 @@ DATADIR=/var/data
 # On first boot it can seem like the application is silently hanging since
 # on slower systems creating the wine prefix can take upwards of 2
 # minutes (tested on a 2-core Silverblue VM)
-echo "Creating or updating wine prefix (~/.wine64), this may take a minute..."
+echo "Creating or updating wine prefix (~/.wine), this may take a minute..."
 
 # Silently create/update Wine prefix
-WINEPREFIX=~/.wine64 WINEDEBUG=-all DISPLAY=:invalid wineboot -u
+WINEPREFIX=~/.wine WINEDEBUG=-all DISPLAY=:invalid wineboot -u
 
 # Log file Fightcade expects to be able to write to
 mkdir -p /var/data/logs
@@ -38,8 +38,10 @@ touch ${DATADIR}/config/snes9x/stdout.txt
 touch ${DATADIR}/config/snes9x/stderr.txt
 # Flycast
 mkdir -p ${DATADIR}/config/flycast
-mkdir -p ${DATADIR}/config/flycast/mappings
 touch ${DATADIR}/config/flycast/emu.cfg
+mkdir -p ${DATADIR}/config/flycast/mappings
+mkdir -p ${DATADIR}/config/flycast/data
+cp -R /app/fightcade/Fightcade/emulator/flycast/data_orig/* ${DATADIR}/config/flycast/data
 
 # Boot Fightcade frontend
 /app/bin/zypak-wrapper /app/fightcade/Fightcade/fc2-electron/fc2-electron
