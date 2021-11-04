@@ -48,6 +48,7 @@ finish-args:
   - --share=network
   - --socket=pulseaudio
   - --allow=multiarch
+  - --talk-name=org.freedesktop.ScreenSaver
   - --talk-name=org.freedesktop.Notifications
   - --device=all
   - --env=PATH=/app/bin:/usr/bin:/app/wine/bin
