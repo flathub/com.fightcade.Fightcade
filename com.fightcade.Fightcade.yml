@@ -52,7 +52,6 @@ finish-args:
   - --talk-name=org.freedesktop.Notifications
   - --device=all
   - --env=PATH=/app/bin:/usr/bin:/app/wine/bin
-  - --persist=.wine
   # Skip Gecko and Mono popups when creating Wine prefix
   - --env=WINEDLLOVERRIDES=mscoree,mshtml=
   # Support 32-bit runtime
