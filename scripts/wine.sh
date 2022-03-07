@@ -1,17 +1,17 @@
 #!/bin/sh
 
 WINEERROR=$(cat <<-END
-<i>/app/wine/bin/wine</i> is missing.
+<i>/app/bin/wine</i> is missing.
 
-<b>com.fightcade.Fightcade.Wine</b> is required to run FinalBurn and Snes9x games
+<b>org.winehq.Wine</b> is required to run FinalBurn and Snes9x games
 END
 )
 
-WINEPATH="/app/wine/bin/wine"
+WINEPATH="/app/bin/wine"
 export WINEPREFIX=~/.wine64
 
 if [[ -f ${WINEPATH} ]]; then
-	/app/wine/bin/wine "$@"
+	/app/bin/wine "$@"
 else
 	zenity \
 	  --warning \
