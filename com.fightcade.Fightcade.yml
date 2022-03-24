@@ -76,6 +76,15 @@ modules:
       - ln -s /var/data/flycast_roms.json emulator/flycast_roms.json
       - ln -s /var/data/nulldc_roms.json emulator/nulldc_roms.json
       - ln -s /var/data/fc1_roms.json emulator/fc1_roms.json
+      - ln -s /var/data/fbneo_cv_roms.json emulator/fbneo_cv_roms.json
+      - ln -s /var/data/fbneo_gg_roms.json emulator/fbneo_gg_roms.json
+      - ln -s /var/data/fbneo_md_roms.json emulator/fbneo_md_roms.json
+      - ln -s /var/data/fbneo_msx_roms.json emulator/fbneo_msx_roms.json
+      - ln -s /var/data/fbneo_nes_roms.json emulator/fbneo_nes_roms.json
+      - ln -s /var/data/fbneo_pce_roms.json emulator/fbneo_pce_roms.json
+      - ln -s /var/data/fbneo_sg1k_roms.json emulator/fbneo_sg1k_roms.json
+      - ln -s /var/data/fbneo_sms_roms.json emulator/fbneo_sms_roms.json
+      - ln -s /var/data/fbneo_tg_roms.json emulator/fbneo_tg_roms.json
       # Symlink the ROMs folder to persistent directories
       - rmdir emulator/fbneo/ROMs
       - ln -s /var/data/ROMs/fbneo emulator/fbneo/ROMs
