@@ -162,6 +162,15 @@ modules:
         path: metainfo.xml
 
   # Flycast native dep
+  - shared-modules/lua5.3/lua-5.3.5.json
+
+  # Flycast expects liblua to be named liblua5.3.so.0
+  - name: lua
+    buildsystem: simple
+    build-commands:
+      - ln -s /app/lib/liblua.so /app/lib/liblua5.3.so.0
+
+  # Flycast native dep
   - name: libcurl-gnutls
     buildsystem: simple
     build-commands:
