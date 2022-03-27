@@ -31,6 +31,7 @@ add-extensions:
     download-if: active-gl-driver
     enable-if: active-gl-driver
 
+  # Add Fighcade-specific Wine extension to runtime.
   com.fightcade.Fightcade.Wine:
     directory: wine
     version: stable
@@ -48,9 +49,13 @@ finish-args:
   - --share=network
   - --socket=pulseaudio
   - --allow=multiarch
+  # Allows emulators to inhibit screensavers
   - --talk-name=org.freedesktop.ScreenSaver
+  # Allows Fightcade UI to send notifications for challenges
   - --talk-name=org.freedesktop.Notifications
+  # Needed for controller support
   - --device=all
+  # Add Wine extension point to $PATH
   - --env=PATH=/app/bin:/usr/bin:/app/wine/bin
   # Skip Gecko and Mono popups when creating Wine prefix
   - --env=WINEDLLOVERRIDES=mscoree,mshtml=
@@ -70,7 +75,15 @@ modules:
     build-commands:
       - mkdir -p /app/fightcade/Fightcade
       - mkdir -p /app/fightcade/Resources
-      # Symlink jc2json dir
+
+      # A lot of things need to be symlinked to writable files. Fightcade
+      # expects to be able to write to files in its subdirectories,
+      # /app/fightcade/Fightcade is r/o in Flatpak.
+      #
+      # To work around this we symlink a bunch of files to writable
+      # versions in /var/data/
+
+      # JSON files
       - ln -s /var/data/fbneo_roms.json emulator/fbneo_roms.json
       - ln -s /var/data/snes9x_roms.json emulator/snes9x_roms.json
       - ln -s /var/data/flycast_roms.json emulator/flycast_roms.json
@@ -85,7 +98,7 @@ modules:
       - ln -s /var/data/fbneo_sg1k_roms.json emulator/fbneo_sg1k_roms.json
       - ln -s /var/data/fbneo_sms_roms.json emulator/fbneo_sms_roms.json
       - ln -s /var/data/fbneo_tg_roms.json emulator/fbneo_tg_roms.json
-      # Symlink the ROMs folder to persistent directories
+      # ROM storage directories
       - rmdir emulator/fbneo/ROMs
       - ln -s /var/data/ROMs/fbneo emulator/fbneo/ROMs
       - rmdir emulator/ggpofba/ROMs
@@ -100,21 +113,23 @@ modules:
       - ln -s /var/data/logs/fcade.log.1 emulator/fcade.log.1
       - ln -s /var/data/logs/fcade.log.2 emulator/fcade.log.3
       - ln -s /var/data/logs/fcade.log.3 emulator/fcade.log.2
-      # Symlink emulator configs to writable directories
-      # FBNeo fixes
+      # FBNeo config
       - rm -rf emulator/fbneo/config
       - ln -s /var/data/config/fcadefbneo emulator/fbneo/config
+      # Snes9x config
       - ln -s /var/data/config/snes9x/fcadesnes9x.conf emulator/snes9x/fcadesnes9x.conf
+      - rm -r emulator/snes9x/Saves
+      - ln -s /var/data/config/snes9x/Saves emulator/snes9x/Saves
       # Snes9x fixes
       - ln -s /var/data/config/snes9x/Valid.Ext emulator/snes9x/Valid.Ext
       - ln -s /var/data/config/snes9x/stdout.txt emulator/snes9x/stdout.txt
       - ln -s /var/data/config/snes9x/stderr.txt emulator/snes9x/stderr.txt
-      - rm -r emulator/snes9x/Saves
-      - ln -s /var/data/config/snes9x/Saves emulator/snes9x/Saves
-      # Flycast fixes
+      # Flycast config
       - ln -s /var/data/config/flycast/emu.cfg emulator/flycast/emu.cfg
       - rm -rf emulator/flycast/mappings
       - ln -s /var/data/config/flycast/mappings emulator/flycast/mappings
+      # Backup the original data directory. We copy the savestates out of
+      # the original directory at runtime.
       - mv emulator/flycast/data emulator/flycast/data_orig
       - ln -s /var/data/config/flycast/data emulator/flycast/data
       # Wine wrapper
@@ -224,6 +239,7 @@ modules:
         url: http://miniupnp.free.fr/files/miniupnpc-2.2.3.tar.gz
         sha256: dce41b4a4f08521c53a0ab163ad2007d18b5e1aa173ea5803bd47a1be3159c24
 
+  # Wine dep. Should be moved to com.fightcade.Fightcade.Wine eventually.
   - name: faudio32
     buildsystem: cmake-ninja
     build-options:
@@ -244,6 +260,7 @@ modules:
         url: https://github.com/FNA-XNA/FAudio/archive/20.12.tar.gz
         sha256: d5a1656ec79cd2878dddabc07d7f7848c11844595c76033aed929b10d922c009
 
+  # Wine dep. Should be moved to com.fightcade.Fightcade.Wine eventually.
   - name: faudio64
     buildsystem: cmake-ninja
     build-options:
