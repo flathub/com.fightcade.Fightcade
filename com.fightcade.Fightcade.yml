@@ -116,6 +116,9 @@ modules:
       # FBNeo config
       - rm -rf emulator/fbneo/config
       - ln -s /var/data/config/fcadefbneo emulator/fbneo/config
+      # FBNeo training mode
+      - rm -rf emulator/fbneo/fbneo-training-mode
+      - ln -s /var/data/fbneo-training-mode emulator/fbneo/fbneo-training-mode
       # Snes9x config
       - ln -s /var/data/config/snes9x/fcadesnes9x.conf emulator/snes9x/fcadesnes9x.conf
       - rm -r emulator/snes9x/Saves
