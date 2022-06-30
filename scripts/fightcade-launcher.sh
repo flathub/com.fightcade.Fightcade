@@ -29,6 +29,7 @@ mkdir -p ${DATADIR}/ROMs/flycast
 # FBNeo
 mkdir -p ${DATADIR}/config/fcadefbneo
 cp -n /app/fightcade/Fightcade/emulator/fbneo/config/fcadefbneo.default.ini ${DATADIR}/config/fcadefbneo/fcadefbneo.ini 2> /dev/null
+mkdir -p ${DATADIR}/fbneo-training-mode
 # Snes9x
 mkdir -p ${DATADIR}/config/snes9x
 mkdir -p ${DATADIR}/config/snes9x/Saves
