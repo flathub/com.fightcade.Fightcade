@@ -117,7 +117,8 @@ modules:
       - rm -rf emulator/fbneo/config
       - ln -s /var/data/config/fcadefbneo emulator/fbneo/config
       # FBNeo training mode
-      - for game in emulator/fbneo/fbneo-training-mode/games/*; do ln -s /var/data/fbneo-training-mode-configs/${game##*/}.lua ${game}/config.lua; done
+      - for game in emulator/fbneo/fbneo-training-mode/games/*; do ln -s /var/data/fbneo-training-mode-configs/${game##*/}.lua
+        ${game}/config.lua; done
       # Snes9x config
       - ln -s /var/data/config/snes9x/fcadesnes9x.conf emulator/snes9x/fcadesnes9x.conf
       - rm -r emulator/snes9x/Saves
@@ -139,8 +140,8 @@ modules:
       - cp -R * /app/fightcade/Fightcade
     sources:
       - type: archive
-        url: https://web.fightcade.com/download/Fightcade-linux-v2.1.31.tar.gz
-        sha256: 9c15f06be4353f4016bd16536b3fd992836613a4bfe352fc9f1b5d0236aae6a4
+        url: https://web.fightcade.com/download/Fightcade-linux-v2.1.32.tar.gz
+        sha256: 4d4e8548500e5cc80a013e12bb99baadf2a79e28220a5eec3d15d233b24d978d
         x-checker-data:
           type: html
           url: https://web.fightcade.com/download/update.json
