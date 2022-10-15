@@ -34,7 +34,7 @@ add-extensions:
   # Add Fighcade-specific Wine extension to runtime.
   com.fightcade.Fightcade.Wine:
     directory: wine
-    version: stable
+    version: beta
     add-ld-path: lib32
     no-autodownload: false
 
