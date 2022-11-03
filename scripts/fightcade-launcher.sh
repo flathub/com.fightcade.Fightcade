@@ -35,6 +35,8 @@ for game in /app/fightcade/Fightcade/emulator/fbneo/fbneo-training-mode/games/*
 do
   touch ${DATADIR}/fbneo-training-mode-configs/${game##*/}.lua
 done
+# FBNeo saved overlays
+mkdir -p ${DATADIR}/config/fcadefbneo/fightcade
 # Snes9x
 mkdir -p ${DATADIR}/config/snes9x
 mkdir -p ${DATADIR}/config/snes9x/Saves
