@@ -50,6 +50,7 @@ mkdir -p ${DATADIR}/config/flycast
 touch ${DATADIR}/config/flycast/emu.cfg
 mkdir -p ${DATADIR}/config/flycast/mappings
 mkdir -p ${DATADIR}/config/flycast/data
+touch ${DATADIR}/logs/flycast.log
 # Flycast: copy back in the save states the emulator ships with. If newer ones are available
 # they will be automatically downloaded at runtime.
 cp -R /app/fightcade/Fightcade/emulator/flycast/data_orig/* ${DATADIR}/config/flycast/data
