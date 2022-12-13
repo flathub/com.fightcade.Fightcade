@@ -133,6 +133,7 @@ modules:
       - ln -s /var/data/config/flycast/emu.cfg emulator/flycast/emu.cfg
       - rm -rf emulator/flycast/mappings
       - ln -s /var/data/config/flycast/mappings emulator/flycast/mappings
+      - ln -s /var/data/logs/flycast.log emulator/flycast/flycast.log
       # Backup the original data directory. We copy the savestates out of
       # the original directory at runtime.
       - mv emulator/flycast/data emulator/flycast/data_orig
