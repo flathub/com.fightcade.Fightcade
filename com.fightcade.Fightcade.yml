@@ -218,6 +218,11 @@ modules:
         url: https://libzip.org/download/libzip-1.9.2.tar.xz
         sha256: c93e9852b7b2dc931197831438fee5295976ee0ba24f8524a8907be5c2ba5937
 
+  - name: libzip symlink
+    buildsystem: simple
+    build-commands:
+      - ln -s /app/lib/libzip.so.5 /app/lib/libzip.so.4
+
   # Flycast native dep
   - name: libminiupnpc
     buildsystem: cmake-ninja
