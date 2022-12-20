@@ -1,8 +1,8 @@
 app-id: com.fightcade.Fightcade
 base: org.electronjs.Electron2.BaseApp
-base-version: '21.08'
+base-version: '22.08'
 runtime: org.freedesktop.Platform
-runtime-version: '21.08'
+runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
 command: fightcade
 tags:
@@ -12,17 +12,12 @@ tags:
 add-extensions:
   org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: '21.08'
-
-  org.freedesktop.Platform.Compat.i386.Debug:
-    directory: lib/debug/lib/i386-linux-gnu
-    version: '21.08'
-    no-autodownload: true
+    version: '22.08'
 
   org.freedesktop.Platform.GL32:
     directory: lib/i386-linux-gnu/GL
     version: '1.4'
-    versions: 21.08;1.4
+    versions: 22.08;1.4
     subdirectories: true
     no-autodownload: true
     autodelete: false
@@ -67,7 +62,7 @@ modules:
   - name: compat
     buildsystem: simple
     build-commands:
-      - mkdir -p /app/lib/i386-linux-gnu /app/lib/debug/lib/i386-linux-gnu
+      - mkdir -p /app/lib/i386-linux-gnu
       - install -d /app/wine
 
   - name: fightcade
@@ -220,8 +215,13 @@ modules:
       - /lib/*.la
     sources:
       - type: archive
-        url: https://libzip.org/download/libzip-1.7.3.tar.xz
-        sha256: a60473ffdb7b4260c08bfa19c2ccea0438edac11193c3afbbb1f17fbcf6c6132
+        url: https://libzip.org/download/libzip-1.9.2.tar.xz
+        sha256: c93e9852b7b2dc931197831438fee5295976ee0ba24f8524a8907be5c2ba5937
+
+  - name: libzip symlink
+    buildsystem: simple
+    build-commands:
+      - ln -s /app/lib/libzip.so.5 /app/lib/libzip.so.4
 
   # Flycast native dep
   - name: libminiupnpc
