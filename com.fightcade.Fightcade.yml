@@ -215,8 +215,8 @@ modules:
       - /lib/*.la
     sources:
       - type: archive
-        url: https://libzip.org/download/libzip-1.7.3.tar.xz
-        sha256: a60473ffdb7b4260c08bfa19c2ccea0438edac11193c3afbbb1f17fbcf6c6132
+        url: https://libzip.org/download/libzip-1.9.2.tar.xz
+        sha256: c93e9852b7b2dc931197831438fee5295976ee0ba24f8524a8907be5c2ba5937
 
   # Flycast native dep
   - name: libminiupnpc
