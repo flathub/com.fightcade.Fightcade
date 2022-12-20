@@ -1,8 +1,8 @@
 app-id: com.fightcade.Fightcade
 base: org.electronjs.Electron2.BaseApp
-base-version: '21.08'
+base-version: '22.08'
 runtime: org.freedesktop.Platform
-runtime-version: '21.08'
+runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
 command: fightcade
 tags:
@@ -12,11 +12,11 @@ tags:
 add-extensions:
   org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: '21.08'
+    version: '22.08'
 
   org.freedesktop.Platform.Compat.i386.Debug:
     directory: lib/debug/lib/i386-linux-gnu
-    version: '21.08'
+    version: '22.08'
     no-autodownload: true
 
   org.freedesktop.Platform.GL32:
