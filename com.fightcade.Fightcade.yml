@@ -1,6 +1,4 @@
 app-id: com.fightcade.Fightcade
-base: org.electronjs.Electron2.BaseApp
-base-version: '22.08'
 runtime: org.freedesktop.Platform
 runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
@@ -176,6 +174,14 @@ modules:
         path: scripts/fcade-quark.sh
       - type: file
         path: metainfo.xml
+
+  # Electron
+  - name: zypak
+  sources:
+    - type: git
+      url: https://github.com/refi64/zypak
+      tag: v2022.04
+      commit: 55a60d110301e8dd37b631503c3524ab7baaf7aa
 
   # Flycast native dep
   - shared-modules/lua5.3/lua-5.3.5.json
