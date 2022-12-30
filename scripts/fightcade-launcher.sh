@@ -56,4 +56,4 @@ touch ${DATADIR}/logs/flycast.log
 cp -R /app/fightcade/Fightcade/emulator/flycast/data_orig/* ${DATADIR}/config/flycast/data
 
 # Boot Fightcade frontend
-/app/bin/zypak-wrapper /app/fightcade/Fightcade/fc2-electron/fc2-electron
+/app/bin/zypak-wrapper /app/fightcade/Fightcade/fc2-electron/fc2-electron --no-sandbox
