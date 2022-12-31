@@ -56,6 +56,8 @@ finish-args:
   - --env=WINEDLLOVERRIDES=mscoree,mshtml=
   # Support 32-bit runtime
   - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
+  # Disable Electron sandbox
+  - --env=ZYPAK_DISABLE_SANDBOX=1
 
 modules:
   # Create 32-bit and wine directories
