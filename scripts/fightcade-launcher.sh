@@ -30,11 +30,8 @@ mkdir -p ${DATADIR}/ROMs/flycast
 mkdir -p ${DATADIR}/config/fcadefbneo
 cp -n /app/fightcade/Fightcade/emulator/fbneo/config/fcadefbneo.default.ini ${DATADIR}/config/fcadefbneo/fcadefbneo.ini 2> /dev/null
 # FBNeo training mode
-mkdir -p ${DATADIR}/fbneo-training-mode-configs
-for game in /app/fightcade/Fightcade/emulator/fbneo/fbneo-training-mode/games/*
-do
-  touch ${DATADIR}/fbneo-training-mode-configs/${game##*/}.lua
-done
+mkdir -p ${DATADIR}/fbneo-training-mode
+cp -R /app/fightcade/Fightcade/emulator/fbneo/fbneo-training-mode-original/* ${DATADIR}/fbneo-training-mode/
 # FBNeo saved overlays
 mkdir -p ${DATADIR}/config/fcadefbneo/fightcade
 # Snes9x
