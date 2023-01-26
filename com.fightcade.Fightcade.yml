@@ -112,8 +112,8 @@ modules:
       - rm -rf emulator/fbneo/config
       - ln -s /var/data/config/fcadefbneo emulator/fbneo/config
       # FBNeo training mode
-      - for game in emulator/fbneo/fbneo-training-mode/games/*; do ln -s /var/data/fbneo-training-mode-configs/${game##*/}.lua
-        ${game}/config.lua; done
+      - mv emulator/fbneo/fbneo-training-mode emulator/fbneo/fbneo-training-mode-original
+      - ln -s /var/data/fbneo-training-mode emulator/fbneo/fbneo-training-mode
       # FBNeo saved overlays
       - ln -s /var/data/config/fcadefbneo/fightcade emulator/fbneo/fightcade
       # Snes9x config
