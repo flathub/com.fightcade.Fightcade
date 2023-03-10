@@ -34,6 +34,9 @@ mkdir -p ${DATADIR}/fbneo-training-mode
 cp -R /app/fightcade/Fightcade/emulator/fbneo/fbneo-training-mode-original/* ${DATADIR}/fbneo-training-mode/
 # FBNeo saved overlays
 mkdir -p ${DATADIR}/config/fcadefbneo/fightcade
+# FBNeo: copy back in the save states the emulator ships with.
+mkdir -p ${DATADIR}/config/fcadefbneo/savestates
+cp -R /app/fightcade/Fightcade/emulator/fbneo/savestates_orig/* ${DATADIR}/config/fcadefbneo/savestates
 # Snes9x
 mkdir -p ${DATADIR}/config/snes9x
 mkdir -p ${DATADIR}/config/snes9x/Saves

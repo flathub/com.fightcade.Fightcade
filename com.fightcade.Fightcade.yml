@@ -114,6 +114,9 @@ modules:
       # FBNeo training mode
       - mv emulator/fbneo/fbneo-training-mode emulator/fbneo/fbneo-training-mode-original
       - ln -s /var/data/fbneo-training-mode emulator/fbneo/fbneo-training-mode
+      # FBNeo save states
+      - mv emulator/fbneo/savestates emulator/fbneo/savestates_orig
+      - ln -s /var/data/config/fcadefbneo/savestates emulator/fbneo/savestates
       # FBNeo saved overlays
       - ln -s /var/data/config/fcadefbneo/fightcade emulator/fbneo/fightcade
       # Snes9x config
