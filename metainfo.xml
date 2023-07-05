@@ -28,6 +28,35 @@
     </screenshot>
   </screenshots>
   <releases>
+      <release date="2023-07-05" version="2.3">
+      <p>FBNeo</p>
+      <ul>
+        <li>
+          Upgraded Wine to 8.0.1
+        </li>
+        <li>
+          Wine prefixes moved to data/wineprefixes/$(wine --version)
+        </li>
+        <li>
+          Added support for local save states
+        </li>
+        <li>
+          Improved training mode support
+        </li>
+        <li>
+          GPU sandbox disabled for better Nvidia compatibility (to avoid a crash at launch)
+        </li>
+        <li>
+          Support saved overlays
+        </li>
+      </ul>
+      <p>Flycast</p>
+      <ul>
+        <li>
+          Enable logging to a mutable copy of flycast.log
+        </li>
+      </ul>
+    </release>
     <release date="2022-03-27" version="2.2">
       <ul>
         <li>
