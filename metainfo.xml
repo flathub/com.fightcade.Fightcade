@@ -46,6 +46,7 @@
         <li>
           GPU sandbox disabled for better Nvidia compatibility (to avoid a crash at launch)
         </li>
+      </ul>
     </release>
     <release date="2023-07-05" version="2.3">
       <ul>
