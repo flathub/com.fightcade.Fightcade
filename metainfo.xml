@@ -46,6 +46,15 @@
         <li>
           GPU sandbox disabled for better Nvidia compatibility (to avoid a crash at launch)
         </li>
+        <li>
+          Support saved overlays
+        </li>
+      </ul>
+      <p>Flycast</p>
+      <ul>
+        <li>
+          Enable logging to a mutable copy of flycast.log
+        </li>
       </ul>
     </release>
     <release date="2022-03-27" version="2.2">
