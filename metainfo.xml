@@ -28,7 +28,7 @@
     </screenshot>
   </screenshots>
   <releases>
-    <release date="2022-03-27" version="2.2">
+      <release date="2023-07-05" version="2.3">
       <p>FBNeo</p>
       <ul>
         <li>
@@ -48,7 +48,7 @@
         </li>
       </ul>
     </release>
-    <release date="2023-07-05" version="2.3">
+    <release date="2022-03-27" version="2.2">
       <ul>
         <li>
           Added new Flycast dependencies to sandbox (Lua 5.3, libao)
