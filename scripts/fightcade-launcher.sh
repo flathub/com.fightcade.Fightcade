@@ -8,8 +8,13 @@ DATADIR=/var/data
 # minutes (tested on a 2-core Fedora Silverblue VM)
 echo "Creating or updating wine prefix (/var/data/winepfx), this may take a minute..."
 
+# Delete stale wine prefixes (100M-200M each, we should clean up)
+rm -rf /var/data/winepfx # wine 5.0 prefix
+rm -rf /var/data/winepfx-8 # wine 5.0 prefix
+
+. /app/bin/get-wine-prefix
 # Silently create/update Wine prefix
-WINEPREFIX=/var/data/winepfx-8 WINEDEBUG=-all DISPLAY=:invalid wineboot -u
+WINEPREFIX=${WINEPREFIX} WINEDEBUG=-all DISPLAY=:invalid wineboot -u
 
 # Log file Fightcade expects to be able to write to
 mkdir -p /var/data/logs

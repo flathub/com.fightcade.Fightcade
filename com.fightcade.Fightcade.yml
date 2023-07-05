@@ -158,6 +158,7 @@ modules:
       - install -Dm755 fcade-quark.desktop /app/share/applications/com.fightcade.Fightcade.fcade-quark.desktop
       - install -Dm755 fightcade-launcher.sh /app/bin/fightcade
       - install -Dm755 fcade-quark.sh /app/bin/fcade-quark
+      - install -Dm755 get-wine-prefix.sh /app/bin/get-wine-prefix
       - install -Dm755 com.fightcade.Fightcade-64.png /app/share/icons/hicolor/64x64/apps/com.fightcade.Fightcade.png
       - install -Dm755 com.fightcade.Fightcade-128.png /app/share/icons/hicolor/128x128/apps/com.fightcade.Fightcade.png
       - install -Dm755 com.fightcade.Fightcade-256.png /app/share/icons/hicolor/256x256/apps/com.fightcade.Fightcade.png
@@ -177,6 +178,8 @@ modules:
         path: scripts/fightcade-launcher.sh
       - type: file
         path: scripts/fcade-quark.sh
+      - type: file
+        path: scripts/get-wine-prefix.sh
       - type: file
         path: metainfo.xml
 
