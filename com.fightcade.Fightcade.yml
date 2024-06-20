@@ -232,6 +232,7 @@ modules:
   # Flycast native dep
   - name: libminiupnpc
     buildsystem: cmake-ninja
+    disable-http-decompression: true,
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
       - -DUPNPC_BUILD_SHARED=true
