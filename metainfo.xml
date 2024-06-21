@@ -28,6 +28,11 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release date="2024-06-20" version="2.3.1">
+      <description>
+        Fightcade client upgraded to version 2.1.41
+      </description>
+    </release>
     <release date="2023-07-05" version="2.3">
       <description>
         <p>FBNeo</p>
