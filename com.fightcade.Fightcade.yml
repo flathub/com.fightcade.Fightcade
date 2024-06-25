@@ -67,6 +67,16 @@ modules:
       - mkdir -p /app/lib/i386-linux-gnu
       - install -d /app/wine
 
+  # For unbundling AppImage'd Flycast
+  - name: unappimage
+    buildsystem: simple
+    build-commands:
+      - make -C squashfs-tools -j ${FLATPAK_BUILDER_N_JOBS} install INSTALL_DIR=/app/bin
+    sources:
+      - type: git
+        url: https://github.com/refi64/unappimage
+        commit: d7f86f2a0d7ec3a69211125207d5f127386b849a
+
   - name: fightcade
     buildsystem: simple
     build-commands:
@@ -140,6 +150,12 @@ modules:
       - ln -s /var/data/config/flycast/data emulator/flycast/data
       # Wine wrapper
       - install -Dm755 wine.sh /app/fightcade/Resources/wine.sh
+      # Flycast binary
+      - unappimage emulator/flycast/flycast.elf
+      - rm emulator/flycast/flycast.elf
+      - install -Dm755 squashfs-root/usr/bin/flycast-dojo emulator/flycast/flycast.elf
+      - rm -rf squashfs-root
+      # Copy to /app/fightcade/Fightcade
       - cp -R * /app/fightcade/Fightcade
     sources:
       - type: archive
