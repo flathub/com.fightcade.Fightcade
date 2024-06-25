@@ -56,6 +56,8 @@ finish-args:
   - --env=WINEDLLOVERRIDES=mscoree,mshtml=
   # Support 32-bit runtime
   - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
+  # Flycast env var
+  - --env=FLYCAST_ROOT=/app/fightcade/Fightcade/emulator/flycast
 
 modules:
   # Create 32-bit and wine directories
