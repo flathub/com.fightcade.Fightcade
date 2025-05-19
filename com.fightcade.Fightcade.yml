@@ -201,6 +201,15 @@ modules:
       - type: file
         path: metainfo.xml
 
+  # Workaround for Steam Deck gaming mode's xdg-open
+  - name: steamdeck-xdgopen
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 steamdeck-xdgopen.sh /app/bin/xdg-open
+    sources:
+      - type: file
+        path: scripts/steamdeck-xdgopen.sh
+
   # Flycast native dep
   - shared-modules/lua5.3/lua-5.3.5.json
 
