@@ -28,6 +28,11 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release date="2025-04-20" version="2.4">
+      <description>
+        <p>Add a workaround for emulators not launching in gaming mode on SteamOS</p>
+      </description>
+    </release>
     <release date="2024-06-25" version="2.3.2">
       <description>
         <p>Add support for Flycast AppImage (fixes Flycast)</p>
