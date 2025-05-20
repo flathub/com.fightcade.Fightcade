@@ -28,6 +28,11 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release date="2025-04-20" version="2.4.1">
+      <description>
+        <p>Fix for ReCaptcha blocking account creation.</p>
+      </description>
+    </release>
     <release date="2025-04-20" version="2.4">
       <description>
         <p>Add a workaround for emulators not launching in gaming mode on SteamOS</p>
