@@ -1,8 +1,8 @@
 app-id: com.fightcade.Fightcade
 base: org.electronjs.Electron2.BaseApp
-base-version: '23.08'
+base-version: '24.08'
 runtime: org.freedesktop.Platform
-runtime-version: '23.08'
+runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 command: fightcade
 tags:
@@ -12,12 +12,12 @@ tags:
 add-extensions:
   org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: '23.08'
+    version: '24.08'
 
   org.freedesktop.Platform.GL32:
     directory: lib/i386-linux-gnu/GL
-    version: '1.4'
-    versions: 23.08;1.4
+    version: '24.08'
+    versions: 24.08;1.4
     subdirectories: true
     no-autodownload: true
     autodelete: false
@@ -224,8 +224,10 @@ modules:
     buildsystem: autotools
     sources:
       - type: archive
-        url: https://downloads.xiph.org/releases/ao/libao-1.2.0.tar.gz
-        sha256: 03ad231ad1f9d64b52474392d63c31197b0bc7bd416e58b1c10a329a5ed89caf
+        url: https://gitlab.xiph.org/xiph/libao/-/archive/1.2.2/libao-1.2.2.tar.gz
+        sha256: df8a6d0e238feeccb26a783e778716fb41a801536fe7b6fce068e313c0e2bf4d
+    build-options:
+      cflags: -Wno-error=implicit-function-declaration
 
   # Flycast native dep
   - name: libcurl-gnutls
