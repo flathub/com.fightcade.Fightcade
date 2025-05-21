@@ -2,17 +2,32 @@
 
 DATADIR=/var/data
 
+. /app/bin/get-wine-prefix
+
 # Tell the user that the wine prefix may take some time to create.
 # On first boot it can seem like the application is silently hanging since
 # on slower systems creating the wine prefix can take upwards of 2
 # minutes (tested on a 2-core Fedora Silverblue VM)
-echo "Creating or updating wine prefix (/var/data/winepfx), this may take a minute..."
+echo "Creating or updating wine prefix (${WINEPREFIX}), this may take a minute..."
 
 # Delete stale wine prefixes (100M-200M each, we should clean up)
+# Legacy wineprefixes
 rm -rf /var/data/winepfx # wine 5.0 prefix
 rm -rf /var/data/winepfx-8 # wine 5.0 prefix
+# Newer wineprefixes, versioned by wine release.
+# Only delete prefixes for the non-current version.
+echo "Cleaning up stale wine prefixes..."
+REMOVED=0
+for prefix in /var/data/wineprefixes/*; do
+    [ "${prefix}" = "${WINEPREFIX}" ] && continue
+    REMOVED=1
+    echo "  Removing stale wineprefix: ${prefix}"
+    rm -rf "${prefix}"
+done
+if [ ${REMOVED} = 0 ]; then
+    echo "  Nothing to do."
+fi
 
-. /app/bin/get-wine-prefix
 # Silently create/update Wine prefix
 WINEPREFIX=${WINEPREFIX} WINEDEBUG=-all DISPLAY=:invalid wineboot -u
 
