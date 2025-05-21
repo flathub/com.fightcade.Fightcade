@@ -1,6 +1,6 @@
 app-id: com.fightcade.Fightcade
-base: org.electronjs.Electron2.BaseApp
-base-version: '24.08'
+base: org.winehq.Wine
+base-version: stable-24.08
 runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
@@ -25,18 +25,6 @@ add-extensions:
     merge-dirs: vulkan/icd.d;glvnd/egl_vendor.d;OpenCL/vendors;lib/dri;lib/d3d;vulkan/explicit_layer.d
     download-if: active-gl-driver
     enable-if: active-gl-driver
-
-  # Add Fighcade-specific Wine extension to runtime.
-  com.fightcade.Fightcade.Wine:
-    directory: wine
-    version: stable
-    add-ld-path: lib32
-    no-autodownload: false
-
-# Support 32-bit at buildtime
-sdk-extensions:
-  - org.freedesktop.Sdk.Compat.i386
-  - org.freedesktop.Sdk.Extension.toolchain-i386
 
 finish-args:
   - --share=ipc
@@ -177,6 +165,7 @@ modules:
       - install -Dm755 fightcade-launcher.sh /app/bin/fightcade
       - install -Dm755 fcade-quark.sh /app/bin/fcade-quark
       - install -Dm755 get-wine-prefix.sh /app/bin/get-wine-prefix
+      - install -Dm755 steamdeck-xdgopen.sh /app/bin/xdg-open
       - install -Dm755 com.fightcade.Fightcade-64.png /app/share/icons/hicolor/64x64/apps/com.fightcade.Fightcade.png
       - install -Dm755 com.fightcade.Fightcade-128.png /app/share/icons/hicolor/128x128/apps/com.fightcade.Fightcade.png
       - install -Dm755 com.fightcade.Fightcade-256.png /app/share/icons/hicolor/256x256/apps/com.fightcade.Fightcade.png
@@ -199,16 +188,21 @@ modules:
       - type: file
         path: scripts/get-wine-prefix.sh
       - type: file
+        path: scripts/steamdeck-xdgopen.sh
+      - type: file
         path: metainfo.xml
 
-  # Workaround for Steam Deck gaming mode's xdg-open
-  - name: steamdeck-xdgopen
-    buildsystem: simple
-    build-commands:
-      - install -Dm755 steamdeck-xdgopen.sh /app/bin/xdg-open
+  # Electron wrapper, needed for Fightcade frontend
+  - name: zypak
     sources:
-      - type: file
-        path: scripts/steamdeck-xdgopen.sh
+      - type: git
+        url: https://github.com/refi64/zypak
+        tag: v2024.01.17
+        commit: ded79a2f8a509adc21834b95a9892073d4a91fdc
+        x-checker-data:
+          type: git
+          tag-pattern: ^v([\d.]+)$
+
 
   # Flycast native dep
   - shared-modules/lua5.3/lua-5.3.5.json
@@ -253,6 +247,7 @@ modules:
         url: https://libzip.org/download/libzip-1.9.2.tar.xz
         sha256: c93e9852b7b2dc931197831438fee5295976ee0ba24f8524a8907be5c2ba5937
 
+  # Flycast native symlink
   - name: libzip-symlink
     buildsystem: simple
     build-commands:
@@ -280,39 +275,3 @@ modules:
       - type: archive
         url: https://miniupnp.tuxfamily.org/files/miniupnpc-2.2.3.tar.gz
         sha256: dce41b4a4f08521c53a0ab163ad2007d18b5e1aa173ea5803bd47a1be3159c24
-
-  # Wine dep. Should be moved to com.fightcade.Fightcade.Wine eventually.
-  - name: faudio32
-    buildsystem: cmake-ninja
-    build-options:
-      prepend-pkg-config-path: /app/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig
-      prefix: /app
-      ldflags: -L/app/lib32
-      prepend-path: /usr/lib/sdk/toolchain-i386/bin
-      env:
-        CC: i686-unknown-linux-gnu-gcc
-        CXX: i686-unknown-linux-gnu-g++
-      libdir: /app/lib
-      strip: true
-      no-debuginfo: true
-    config-opts:
-      - -DGSTREAMER=ON
-    sources:
-      - type: archive
-        url: https://github.com/FNA-XNA/FAudio/archive/20.12.tar.gz
-        sha256: d5a1656ec79cd2878dddabc07d7f7848c11844595c76033aed929b10d922c009
-
-  # Wine dep. Should be moved to com.fightcade.Fightcade.Wine eventually.
-  - name: faudio64
-    buildsystem: cmake-ninja
-    build-options:
-      prefix: /app
-      libdir: /app/lib64
-      strip: true
-      no-debuginfo: true
-    config-opts:
-      - -DGSTREAMER=ON
-    sources:
-      - type: archive
-        url: https://github.com/FNA-XNA/FAudio/archive/20.12.tar.gz
-        sha256: d5a1656ec79cd2878dddabc07d7f7848c11844595c76033aed929b10d922c009
