@@ -1,8 +1,8 @@
 app-id: com.fightcade.Fightcade
 base: org.electronjs.Electron2.BaseApp
-base-version: '21.08'
+base-version: '24.08'
 runtime: org.freedesktop.Platform
-runtime-version: '21.08'
+runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 command: fightcade
 tags:
@@ -12,17 +12,12 @@ tags:
 add-extensions:
   org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: '21.08'
-
-  org.freedesktop.Platform.Compat.i386.Debug:
-    directory: lib/debug/lib/i386-linux-gnu
-    version: '21.08'
-    no-autodownload: true
+    version: '24.08'
 
   org.freedesktop.Platform.GL32:
     directory: lib/i386-linux-gnu/GL
-    version: '1.4'
-    versions: 21.08;1.4
+    version: '24.08'
+    versions: 24.08;1.4
     subdirectories: true
     no-autodownload: true
     autodelete: false
@@ -61,14 +56,26 @@ finish-args:
   - --env=WINEDLLOVERRIDES=mscoree,mshtml=
   # Support 32-bit runtime
   - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
+  # Flycast env var
+  - --env=FLYCAST_ROOT=/app/fightcade/Fightcade/emulator/flycast
 
 modules:
   # Create 32-bit and wine directories
   - name: compat
     buildsystem: simple
     build-commands:
-      - mkdir -p /app/lib/i386-linux-gnu /app/lib/debug/lib/i386-linux-gnu
+      - mkdir -p /app/lib/i386-linux-gnu
       - install -d /app/wine
+
+  # For unbundling AppImage'd Flycast
+  - name: unappimage
+    buildsystem: simple
+    build-commands:
+      - make -C squashfs-tools -j ${FLATPAK_BUILDER_N_JOBS} install INSTALL_DIR=/app/bin
+    sources:
+      - type: git
+        url: https://github.com/refi64/unappimage
+        commit: d7f86f2a0d7ec3a69211125207d5f127386b849a
 
   - name: fightcade
     buildsystem: simple
@@ -117,8 +124,13 @@ modules:
       - rm -rf emulator/fbneo/config
       - ln -s /var/data/config/fcadefbneo emulator/fbneo/config
       # FBNeo training mode
-      - for game in emulator/fbneo/fbneo-training-mode/games/*; do ln -s /var/data/fbneo-training-mode-configs/${game##*/}.lua
-        ${game}/config.lua; done
+      - mv emulator/fbneo/fbneo-training-mode emulator/fbneo/fbneo-training-mode-original
+      - ln -s /var/data/fbneo-training-mode emulator/fbneo/fbneo-training-mode
+      # FBNeo save states
+      - mv emulator/fbneo/savestates emulator/fbneo/savestates_orig
+      - ln -s /var/data/config/fcadefbneo/savestates emulator/fbneo/savestates
+      # FBNeo saved overlays
+      - ln -s /var/data/config/fcadefbneo/fightcade emulator/fbneo/fightcade
       # Snes9x config
       - ln -s /var/data/config/snes9x/fcadesnes9x.conf emulator/snes9x/fcadesnes9x.conf
       - rm -r emulator/snes9x/Saves
@@ -131,17 +143,24 @@ modules:
       - ln -s /var/data/config/flycast/emu.cfg emulator/flycast/emu.cfg
       - rm -rf emulator/flycast/mappings
       - ln -s /var/data/config/flycast/mappings emulator/flycast/mappings
+      - ln -s /var/data/logs/flycast.log emulator/flycast/flycast.log
       # Backup the original data directory. We copy the savestates out of
       # the original directory at runtime.
       - mv emulator/flycast/data emulator/flycast/data_orig
       - ln -s /var/data/config/flycast/data emulator/flycast/data
       # Wine wrapper
       - install -Dm755 wine.sh /app/fightcade/Resources/wine.sh
+      # Flycast binary
+      - unappimage emulator/flycast/flycast.elf
+      - rm emulator/flycast/flycast.elf
+      - install -Dm755 squashfs-root/usr/bin/flycast-dojo emulator/flycast/flycast.elf
+      - rm -rf squashfs-root
+      # Copy to /app/fightcade/Fightcade
       - cp -R * /app/fightcade/Fightcade
     sources:
       - type: archive
-        url: https://web.fightcade.com/download/Fightcade-linux-v2.1.33.tar.gz
-        sha256: 1856de83a66c5c53b583b610cc7f96ccc90519a3616c457f9df46b878514de4e
+        url: https://web.fightcade.com/download/Fightcade-linux-v2.1.45.tar.gz
+        sha256: 9880cbfa9b6e4a4eceab750c1d825d3c753ae4b1f84b53df421829e1423c50be
         x-checker-data:
           type: html
           url: https://web.fightcade.com/download/update.json
@@ -157,6 +176,7 @@ modules:
       - install -Dm755 fcade-quark.desktop /app/share/applications/com.fightcade.Fightcade.fcade-quark.desktop
       - install -Dm755 fightcade-launcher.sh /app/bin/fightcade
       - install -Dm755 fcade-quark.sh /app/bin/fcade-quark
+      - install -Dm755 get-wine-prefix.sh /app/bin/get-wine-prefix
       - install -Dm755 com.fightcade.Fightcade-64.png /app/share/icons/hicolor/64x64/apps/com.fightcade.Fightcade.png
       - install -Dm755 com.fightcade.Fightcade-128.png /app/share/icons/hicolor/128x128/apps/com.fightcade.Fightcade.png
       - install -Dm755 com.fightcade.Fightcade-256.png /app/share/icons/hicolor/256x256/apps/com.fightcade.Fightcade.png
@@ -177,7 +197,18 @@ modules:
       - type: file
         path: scripts/fcade-quark.sh
       - type: file
+        path: scripts/get-wine-prefix.sh
+      - type: file
         path: metainfo.xml
+
+  # Workaround for Steam Deck gaming mode's xdg-open
+  - name: steamdeck-xdgopen
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 steamdeck-xdgopen.sh /app/bin/xdg-open
+    sources:
+      - type: file
+        path: scripts/steamdeck-xdgopen.sh
 
   # Flycast native dep
   - shared-modules/lua5.3/lua-5.3.5.json
@@ -193,8 +224,10 @@ modules:
     buildsystem: autotools
     sources:
       - type: archive
-        url: https://downloads.xiph.org/releases/ao/libao-1.2.0.tar.gz
-        sha256: 03ad231ad1f9d64b52474392d63c31197b0bc7bd416e58b1c10a329a5ed89caf
+        url: https://gitlab.xiph.org/xiph/libao/-/archive/1.2.2/libao-1.2.2.tar.gz
+        sha256: df8a6d0e238feeccb26a783e778716fb41a801536fe7b6fce068e313c0e2bf4d
+    build-options:
+      cflags: -Wno-error=implicit-function-declaration
 
   # Flycast native dep
   - name: libcurl-gnutls
@@ -217,12 +250,18 @@ modules:
       - /lib/*.la
     sources:
       - type: archive
-        url: https://libzip.org/download/libzip-1.7.3.tar.xz
-        sha256: a60473ffdb7b4260c08bfa19c2ccea0438edac11193c3afbbb1f17fbcf6c6132
+        url: https://libzip.org/download/libzip-1.9.2.tar.xz
+        sha256: c93e9852b7b2dc931197831438fee5295976ee0ba24f8524a8907be5c2ba5937
+
+  - name: libzip-symlink
+    buildsystem: simple
+    build-commands:
+      - ln -s /app/lib/libzip.so.5 /app/lib/libzip.so.4
 
   # Flycast native dep
   - name: libminiupnpc
     buildsystem: cmake-ninja
+    disable-http-decompression: true,
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
       - -DUPNPC_BUILD_SHARED=true
@@ -239,7 +278,7 @@ modules:
       - install -m0644 -t /app/lib libminiupnpc.so
     sources:
       - type: archive
-        url: http://miniupnp.free.fr/files/miniupnpc-2.2.3.tar.gz
+        url: https://miniupnp.tuxfamily.org/files/miniupnpc-2.2.3.tar.gz
         sha256: dce41b4a4f08521c53a0ab163ad2007d18b5e1aa173ea5803bd47a1be3159c24
 
   # Wine dep. Should be moved to com.fightcade.Fightcade.Wine eventually.
