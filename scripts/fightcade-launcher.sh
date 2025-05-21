@@ -8,8 +8,13 @@ DATADIR=/var/data
 # minutes (tested on a 2-core Fedora Silverblue VM)
 echo "Creating or updating wine prefix (/var/data/winepfx), this may take a minute..."
 
+# Delete stale wine prefixes (100M-200M each, we should clean up)
+rm -rf /var/data/winepfx # wine 5.0 prefix
+rm -rf /var/data/winepfx-8 # wine 5.0 prefix
+
+. /app/bin/get-wine-prefix
 # Silently create/update Wine prefix
-WINEPREFIX=/var/data/winepfx WINEDEBUG=-all DISPLAY=:invalid wineboot -u
+WINEPREFIX=${WINEPREFIX} WINEDEBUG=-all DISPLAY=:invalid wineboot -u
 
 # Log file Fightcade expects to be able to write to
 mkdir -p /var/data/logs
@@ -30,11 +35,13 @@ mkdir -p ${DATADIR}/ROMs/flycast
 mkdir -p ${DATADIR}/config/fcadefbneo
 cp -n /app/fightcade/Fightcade/emulator/fbneo/config/fcadefbneo.default.ini ${DATADIR}/config/fcadefbneo/fcadefbneo.ini 2> /dev/null
 # FBNeo training mode
-mkdir -p ${DATADIR}/fbneo-training-mode-configs
-for game in /app/fightcade/Fightcade/emulator/fbneo/fbneo-training-mode/games/*
-do
-  touch ${DATADIR}/fbneo-training-mode-configs/${game##*/}.lua
-done
+mkdir -p ${DATADIR}/fbneo-training-mode
+cp -R /app/fightcade/Fightcade/emulator/fbneo/fbneo-training-mode-original/* ${DATADIR}/fbneo-training-mode/
+# FBNeo saved overlays
+mkdir -p ${DATADIR}/config/fcadefbneo/fightcade
+# FBNeo: copy back in the save states the emulator ships with.
+mkdir -p ${DATADIR}/config/fcadefbneo/savestates
+cp -R /app/fightcade/Fightcade/emulator/fbneo/savestates_orig/* ${DATADIR}/config/fcadefbneo/savestates
 # Snes9x
 mkdir -p ${DATADIR}/config/snes9x
 mkdir -p ${DATADIR}/config/snes9x/Saves
@@ -48,9 +55,10 @@ mkdir -p ${DATADIR}/config/flycast
 touch ${DATADIR}/config/flycast/emu.cfg
 mkdir -p ${DATADIR}/config/flycast/mappings
 mkdir -p ${DATADIR}/config/flycast/data
+touch ${DATADIR}/logs/flycast.log
 # Flycast: copy back in the save states the emulator ships with. If newer ones are available
 # they will be automatically downloaded at runtime.
 cp -R /app/fightcade/Fightcade/emulator/flycast/data_orig/* ${DATADIR}/config/flycast/data
 
 # Boot Fightcade frontend
-/app/bin/zypak-wrapper /app/fightcade/Fightcade/fc2-electron/fc2-electron
+/app/bin/zypak-wrapper /app/fightcade/Fightcade/fc2-electron/fc2-electron --disable-gpu-sandbox --no-sandbox
