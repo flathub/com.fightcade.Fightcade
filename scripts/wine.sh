@@ -1,17 +1,17 @@
 #!/bin/sh
 
 WINEERROR=$(cat <<-END
-<i>/app/wine/bin/wine</i> is missing.
+<i>/app/bin/wine</i> is missing.
 
-<b>com.fightcade.Fightcade.Wine</b> is required to run FinalBurn and Snes9x games
+Please report this as a bug on Github.
 END
 )
 
-WINEPATH="/app/wine/bin/wine"
+WINEPATH="/app/bin/wine"
 . /app/bin/get-wine-prefix
 
 if [[ -f ${WINEPATH} ]]; then
-	/app/wine/bin/wine "$@"
+	/app/bin/wine "$@"
 else
 	zenity \
 	  --warning \
