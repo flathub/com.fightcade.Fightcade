@@ -25,8 +25,6 @@ finish-args:
   - --talk-name=org.freedesktop.Notifications
   # Needed for controller support
   - --device=all
-  # Add Wine extension point to $PATH
-  - --env=PATH=/app/bin:/usr/bin:/app/wine/bin
   # Skip Gecko and Mono popups when creating Wine prefix
   - --env=WINEDLLOVERRIDES=mscoree,mshtml=
   # Support 32-bit runtime
