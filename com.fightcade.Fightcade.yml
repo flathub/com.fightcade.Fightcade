@@ -12,6 +12,8 @@ tags:
 inherit-extensions:
   - org.freedesktop.Platform.Compat.i386
   - org.freedesktop.Platform.GL32
+  - org.winehq.Wine.gecko
+  - org.winehq.Wine.mono
 
 finish-args:
   - --share=ipc
@@ -25,8 +27,6 @@ finish-args:
   - --talk-name=org.freedesktop.Notifications
   # Needed for controller support
   - --device=all
-  # Skip Gecko and Mono popups when creating Wine prefix
-  - --env=WINEDLLOVERRIDES=mscoree,mshtml=
   # Support 32-bit runtime
   - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
   # Flycast env var
