@@ -172,6 +172,18 @@ modules:
       - type: file
         path: metainfo.xml
 
+  # Provide ip command, needed for Fightcade to determine connection type
+  - name: iproute2
+    buildsystem: autotools
+    make-install-args:
+      - PREFIX=${FLATPAK_DEST}
+      - SBINDIR=${FLATPAK_DEST}/bin
+      - CONFDIR=${FLATPAK_DEST}/etc/iproute2
+    sources:
+      - type: archive
+        url: https://mirrors.edge.kernel.org/pub/linux/utils/net/iproute2/iproute2-6.2.0.tar.xz
+        sha256: 4d72730200ec5b2aabaa1a2f20553c6748292f065d9a154c7d5e22559df9fd62
+
   # Electron wrapper, needed for Fightcade frontend
   - name: zypak
     sources:
