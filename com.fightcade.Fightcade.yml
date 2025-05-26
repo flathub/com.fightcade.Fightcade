@@ -86,6 +86,8 @@ modules:
       - ln -s /var/data/logs/fcade.log.1 emulator/fcade.log.1
       - ln -s /var/data/logs/fcade.log.2 emulator/fcade.log.3
       - ln -s /var/data/logs/fcade.log.3 emulator/fcade.log.2
+      - ln -s /var/data/logs/update-errors.log update-errors.log
+      - ln -s /var/data/logs/update.log update.log
       # FBNeo config
       - rm -rf emulator/fbneo/config
       - ln -s /var/data/config/fcadefbneo emulator/fbneo/config
