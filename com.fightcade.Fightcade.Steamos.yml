@@ -1,0 +1,43 @@
+id: com.fightcade.Fightcade.Steamos
+runtime: com.fightcade.Fightcade
+runtime-version: extra-data
+sdk: org.freedesktop.Sdk//24.08
+build-extension: true
+separate-locales: false
+
+modules:
+  - name: min
+    buildsystem: simple
+    build-commands:
+      # Replace the placeholder PREFIX with the actual destination path in the run script
+      - sed -i "s|PREFIX|${FLATPAK_DEST}|g" run.sh
+      # Install the run script for the Min browser
+      - install -Dm755 run.sh ${FLATPAK_DEST}/steamos/min/min-browser
+      - install -Dm755 apply_extra ${FLATPAK_DEST}/bin/apply_extra
+    post-install:
+      # Install the metainfo file for the Min browser
+      - >-
+        install -Dm644
+        -t ${FLATPAK_DEST}/steamos/min/share/metainfo/
+        ${FLATPAK_ID}.metainfo.xml
+    sources:
+      - type: extra-data
+        filename: min.deb
+        only-arches:
+          - x86_64
+        url: https://github.com/minbrowser/min/releases/download/v1.35.0/min-1.35.0-amd64.deb
+        sha256: 6d066842e8d0f0fa9aad0bd7cb5f56a32a67937ac75e8710c3b229cbcfc89220
+        size: 79754278
+      - type: file
+        path: com.fightcade.Fightcade.Steamos.metainfo.xml
+      - type: script
+        dest-filename: run.sh
+        commands:
+          - zypak-wrapper PREFIX/steamos/min/app/min --no-gpu-sandbox --no-sandbox "$@" 2>&1
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - bsdtar -xOf min.deb data.tar.xz | bsdtar -xJf -
+          - mv opt/Min ../min/app
+          - rm -rf opt usr
+          - rm min.deb
