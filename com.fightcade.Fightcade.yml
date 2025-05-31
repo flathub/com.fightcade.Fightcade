@@ -34,6 +34,8 @@ finish-args:
   - --talk-name=org.freedesktop.Notifications
   # Needed for controller support
   - --device=all
+  # Add Steamos extension point to $PATH
+  - --env=PATH=/app/bin:/usr/bin:/app/steamos/bin
   # Support 32-bit runtime
   - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
   # Flycast env var
@@ -154,7 +156,6 @@ modules:
       - install -Dm755 fcade-quark.sh /app/bin/fcade-quark
       - install -Dm755 get-wine-prefix.sh /app/bin/get-wine-prefix
       - install -Dm755 steamdeck-xdgopen.sh /app/bin/xdg-open
-      - install -Dm755 steamdeck-xdgmime.sh /app/bin/xdg-mime
       - install -Dm755 com.fightcade.Fightcade-64.png /app/share/icons/hicolor/64x64/apps/com.fightcade.Fightcade.png
       - install -Dm755 com.fightcade.Fightcade-128.png /app/share/icons/hicolor/128x128/apps/com.fightcade.Fightcade.png
       - install -Dm755 com.fightcade.Fightcade-256.png /app/share/icons/hicolor/256x256/apps/com.fightcade.Fightcade.png
@@ -176,8 +177,6 @@ modules:
         path: scripts/fcade-quark.sh
       - type: file
         path: scripts/get-wine-prefix.sh
-      - type: file
-        path: scripts/steamdeck-xdgmime.sh
       - type: file
         path: scripts/steamdeck-xdgopen.sh
       - type: file
