@@ -258,7 +258,6 @@ modules:
   # Flycast native dep
   - name: libminiupnpc
     buildsystem: cmake-ninja
-    disable-http-decompression: true,
     config-opts:
       - -DCMAKE_BUILD_TYPE=Release
       - -DUPNPC_BUILD_SHARED=true
@@ -275,5 +274,6 @@ modules:
       - install -m0644 -t /app/lib libminiupnpc.so
     sources:
       - type: archive
+        disable-http-decompression: true
         url: https://miniupnp.tuxfamily.org/files/miniupnpc-2.2.3.tar.gz
         sha256: dce41b4a4f08521c53a0ab163ad2007d18b5e1aa173ea5803bd47a1be3159c24
