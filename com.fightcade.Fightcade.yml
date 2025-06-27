@@ -40,6 +40,8 @@ finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib:/app/lib32
   # Flycast env var
   - --env=FLYCAST_ROOT=/app/fightcade/Fightcade/emulator/flycast
+  # DXVK support (disabled by default)
+  - --env=USE_DXVK=false
 
 modules:
   # For unbundling AppImage'd Flycast
