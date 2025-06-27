@@ -12,6 +12,11 @@ Flycast accepts BIOS files in its subdirectory, but the `flycast/data/` director
 ## FBNeo is crashing with 'Couldn't initialize DirectX9 Alternate video output' module
 This issue happens on Nvidia sometimes, you'll need to install the GL32 Flatpak version of your Nvidia driver. See [this link](https://www.linuxuprising.com/2018/06/how-to-get-flatpak-apps-and-games-built.html) for instructions.
 
+## Can I use DXVK?
+Override the USE_DXVK environment variable using Flatseal or any similar tool. When set to `true` Fightcade will automatically install DXVK at launch.
+
+Please ensure that your hardware is DXVK capable (Vulkan support) before doing this.
+
 ## How do I use Fightcade JSON?
 Extract the zip with the json files directly into `~/.var/app/com.fightcade.Fightcade/data`
 
