@@ -17,6 +17,13 @@ Override the USE_DXVK environment variable using Flatseal or any similar tool. W
 
 Please ensure that your hardware is DXVK capable (Vulkan support) before doing this.
 
+## I'm having issues on my Steam Deck/SteamOS device!
+If you are having issues in gaming mode (such as replays not opening) please install `com.fightcade.Fightcade.Steamos`.
+
+This is an optional extension that improves compatibility with SteamOS.
+
+Please report any SteamOS-specific bugs [in that repo's issue tracker](https://github.com/flathub/com.fightcade.Fightcade.Steamos/issues)
+
 ## How do I use Fightcade JSON?
 Extract the zip with the json files directly into `~/.var/app/com.fightcade.Fightcade/data`
 
