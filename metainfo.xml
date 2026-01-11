@@ -8,10 +8,11 @@
   <url type="homepage">https://www.fightcade.com/</url>
   <summary>Play arcade games online</summary>
   <description>
-    <p>THE BEST WAY TO PLAY RETRO GAMES ONLINE</p>
+    <p>NOTE: This wrapper is not verified by, affiliated with, or supported by the official Fightcade team.</p>
+    <p>The best way to play retro games online.</p>
     <p>Fightcade is a matchmaking platform for retro gaming, bundled with different emulators for seamless online play.</p>
     <p>Our main emulator is FightcadeFBNeo, built using latest FBNeo (0.2.97.44) with a custom and improved GGPO implementation and a better rendering core, making it the current best netplay implementation for rollback-based P2P online play. In layman terms, this means that demanding games in terms of input lag and responsiveness (such as fighting games) can be played over the internet with very little perceivable lag.</p>
-    <p>NOTE: This wrapper is not verified by, affiliated with, or supported by the official Fightcade team.</p>
+
   </description>
   <screenshots>
     <screenshot type="default">
