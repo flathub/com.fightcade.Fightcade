@@ -48,7 +48,9 @@ modules:
   - name: unappimage
     buildsystem: simple
     build-commands:
-      - make -C squashfs-tools -j ${FLATPAK_BUILDER_N_JOBS} install INSTALL_DIR=/app/bin
+      # We need to demote incompatible-pointer-types to a warning until the following PR is landed:
+      # https://github.com/refi64/unappimage/pull/4
+      - CFLAGS="$CFLAGS -Wno-error=incompatible-pointer-types" make -C squashfs-tools -j ${FLATPAK_BUILDER_N_JOBS} install INSTALL_DIR=/app/bin
     sources:
       - type: git
         url: https://github.com/refi64/unappimage
