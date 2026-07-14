@@ -33,6 +33,16 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release date="2026-06-14" version="2.4.2">
+      <description>
+        <p>Upgrade Wine and Freedesktop runtimes to 25.08</p>
+        <ul>
+          <li>
+            Wine 25.08 includes an upgrade to Wine 11.0
+          </li>
+        </ul>
+      </description>
+    </release>
     <release date="2025-04-20" version="2.4.1">
       <description>
         <p>Fix for ReCaptcha blocking account creation.</p>
