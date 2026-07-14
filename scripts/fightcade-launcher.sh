@@ -31,6 +31,15 @@ fi
 # Silently create/update Wine prefix
 WINEPREFIX=${WINEPREFIX} WINEDEBUG=-all DISPLAY=:invalid wineboot -u
 
+# Install DXVK if the USE_DXVK is overridden to true
+if ${USE_DXVK}; then
+    echo "USE_DXVK=true, installing DXVK."
+    WINEPREFIX=${WINEPREFIX} winetricks dxvk
+else
+    echo "USE_DXVK=false, skipping DXVK install."
+    echo "  If you would like to use DXVK, override USE_DXVK using Flatseal."
+fi
+
 # Log file Fightcade expects to be able to write to
 mkdir -p /var/data/logs
 touch ${DATADIR}/logs/fcade-errors.log
