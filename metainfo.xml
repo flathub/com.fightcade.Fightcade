@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component type="desktop">
+<component type="desktop-application">
   <id>com.fightcade.Fightcade</id>
   <launchable type="desktop-id">com.fightcade.Fightcade.desktop</launchable>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-proprietary</project_license>
   <name>Fightcade</name>
-  <url type="homepage">https://www.fightcade.com/</url>
+  <developer_name>Fightcade</developer_name>
   <summary>Play arcade games online</summary>
+  <url type="homepage">https://www.fightcade.com</url>
+  <url type="bugtracker">https://github.com/flathub/com.fightcade.Fightcade/issues</url>
   <description>
-    <p>THE BEST WAY TO PLAY RETRO GAMES ONLINE</p>
+    <p>**NOTE: This wrapper is not verified by, affiliated with, or supported by the official Fightcade team.**</p>
+    <p>The best way to play retro games online.</p>
     <p>Fightcade is a matchmaking platform for retro gaming, bundled with different emulators for seamless online play.</p>
-    <p>Our main emulator is FightcadeFBNeo, built using latest FBNeo (0.2.97.44) with a custom and improved GGPO implementation and a better rendering core, making it the current best netplay implementation for rollback-based P2P online play. In layman terms, this means that demanding games in terms of input lag and responsiveness (such as fighting games) can be played over the internet with very little perceivable lag.</p>
-    <p>NOTE: This wrapper is not verified by, affiliated with, or supported by the official Fightcade team.</p>
+    <p>Our main emulator is FightcadeFBNeo, built using latest FBNeo (0.2.97.44) with a custom and improved GGPO 
+      implementation and a better rendering core, making it the current best netplay implementation for rollback-based P2P online play. 
+      In layman terms, this means that demanding games in terms of input lag and responsiveness (such as fighting games) 
+      can be played over the internet with very little perceivable lag.</p>
   </description>
   <screenshots>
     <screenshot type="default">
@@ -171,6 +176,4 @@
     <content_attribute id="money-advertising">moderate</content_attribute>
   </content_rating>
   <update_contact>pobega_at_gmail.com</update_contact>
-  <developer_name>Fightcade</developer_name>
-  <url type="bugtracker">https://github.com/flathub/com.fightcade.Fightcade/issues</url>
 </component>
