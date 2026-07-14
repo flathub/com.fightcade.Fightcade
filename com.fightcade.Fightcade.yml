@@ -1,8 +1,8 @@
 app-id: com.fightcade.Fightcade
 base: org.winehq.Wine
-base-version: stable-24.08
+base-version: stable-25.08
 runtime: org.freedesktop.Platform
-runtime-version: '24.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 command: fightcade
 tags:
