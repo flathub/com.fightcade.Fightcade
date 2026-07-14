@@ -12,6 +12,18 @@ Flycast accepts BIOS files in its subdirectory, but the `flycast/data/` director
 ## FBNeo is crashing with 'Couldn't initialize DirectX9 Alternate video output' module
 This issue happens on Nvidia sometimes, you'll need to install the GL32 Flatpak version of your Nvidia driver. See [this link](https://www.linuxuprising.com/2018/06/how-to-get-flatpak-apps-and-games-built.html) for instructions.
 
+## Can I use DXVK?
+Override the USE_DXVK environment variable using Flatseal or any similar tool. When set to `true` Fightcade will automatically install DXVK at launch.
+
+Please ensure that your hardware is DXVK capable (Vulkan support) before doing this.
+
+## I'm having issues on my Steam Deck/SteamOS device!
+If you are having issues in gaming mode (such as replays not opening) please install `com.fightcade.Fightcade.Steamos`.
+
+This is an optional extension that improves compatibility with SteamOS.
+
+Please report any SteamOS-specific bugs [in that repo's issue tracker](https://github.com/flathub/com.fightcade.Fightcade.Steamos/issues)
+
 ## How do I use Fightcade JSON?
 Extract the zip with the json files directly into `~/.var/app/com.fightcade.Fightcade/data`
 
