@@ -10,7 +10,6 @@
   <url type="homepage">https://www.fightcade.com</url>
   <url type="bugtracker">https://github.com/flathub/com.fightcade.Fightcade/issues</url>
   <description>
-    <p>**NOTE: This wrapper is not verified by, affiliated with, or supported by the official Fightcade team.**</p>
     <p>The best way to play retro games online.</p>
     <p>Fightcade is a matchmaking platform for retro gaming, bundled with different emulators for seamless online play.</p>
     <p>Our main emulator is FightcadeFBNeo, built using latest FBNeo (0.2.97.44) with a custom and improved GGPO 
