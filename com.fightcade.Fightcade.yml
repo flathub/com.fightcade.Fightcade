@@ -132,6 +132,10 @@ modules:
       - ln -s /var/data/config/flycast/data emulator/flycast/data
       # Wine wrapper
       - install -Dm755 wine.sh /app/fightcade/Resources/wine.sh
+      # Screensaver-inhibiting launch wrapper (holds an org.freedesktop.ScreenSaver
+      # inhibit for the lifetime of the wrapped wine process)
+      - gcc -O2 -Wall launch-inhibit.c -o launch-inhibit $(pkg-config --cflags --libs gio-2.0)
+      - install -Dm755 launch-inhibit /app/fightcade/Resources/launch-inhibit
       # Flycast binary
       - unappimage emulator/flycast/flycast.elf
       - rm emulator/flycast/flycast.elf
@@ -150,6 +154,8 @@ modules:
           url-template: https://web.fightcade.com/download/Fightcade-linux-v${version}.tar.gz
       - type: file
         path: scripts/wine.sh
+      - type: file
+        path: scripts/launch-inhibit.c
 
   - name: fightcade-extra
     buildsystem: simple

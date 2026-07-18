@@ -11,7 +11,7 @@ WINEPATH="/app/bin/wine"
 . /app/bin/get-wine-prefix
 
 if [[ -f ${WINEPATH} ]]; then
-	/app/bin/wine "$@"
+	exec /app/fightcade/Resources/launch-inhibit /app/bin/wine "$@"
 else
 	zenity \
 	  --warning \
