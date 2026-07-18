@@ -34,6 +34,10 @@ finish-args:
   - --talk-name=org.freedesktop.Notifications
   # Needed for controller support
   - --device=all
+  # Read-only access to the host's default-applications list so we can warn the
+  # user when a conflicting non-Flatpak Fightcade install owns the fcade:// URL
+  # handler (see issue #126 and flathub-infra/flatpak-builder-lint#1081).
+  - --filesystem=xdg-config/mimeapps.list:ro
   # Add Steamos extension point to $PATH
   - --env=PATH=/app/bin:/usr/bin:/app/steamos/bin
   # Support 32-bit runtime
