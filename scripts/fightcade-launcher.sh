@@ -2,6 +2,46 @@
 
 DATADIR=/var/data
 
+# Warn when a conflicting non-Flatpak ("desktop") Fightcade install currently
+# owns the fcade:// URL handler. When both are installed they fight over the
+# scheme and neither can reliably launch challenge URLs (see issue #126).
+#
+# The Flatpak's own handler is exported as com.fightcade.Fightcade.fcade-quark
+# .desktop; the desktop version registers a bare fcade-quark.desktop, so we
+# warn whenever the effective default is anything other than ours.
+#
+# NOTE: we read the host's default-applications list at $HOME/.config, NOT
+# $XDG_CONFIG_HOME. Inside the sandbox XDG_CONFIG_HOME is remapped to the app's
+# private config dir, whereas the host file is exposed at $HOME/.config/mimeapps
+# .list via the --filesystem=xdg-config/mimeapps.list:ro permission.
+MIMEAPPS="${HOME}/.config/mimeapps.list"
+OUR_HANDLER="com.fightcade.Fightcade.fcade-quark.desktop"
+
+if [ -f "${MIMEAPPS}" ]; then
+    handler=$(awk -F= -v k="x-scheme-handler/fcade" '
+        /^\[Default Applications\]/ { d=1; next }
+        /^\[/                       { d=0 }
+        d && $1==k                  { print $2; exit }
+    ' "${MIMEAPPS}")
+    handler=${handler%%;*}   # [Default Applications] may be a ;-separated list
+
+    # Only warn when the handler is set to something other than ours. An empty
+    # value means "no explicit default" — unknown, so we stay quiet rather than
+    # false-positive.
+    if [ -n "${handler}" ] && [ "${handler}" != "${OUR_HANDLER}" ]; then
+        zenity \
+          --warning \
+          --title "Conflicting Fightcade install detected" \
+          --ok-label "I Acknowledge" \
+          --text "A non-Flatpak installation of Fightcade currently handles fcade:// links on this system.
+
+Having both the desktop and Flatpak versions installed at once prevents the Fightcade Flatpak from launching challenge URLs correctly.
+
+Please remove one of the two installations. For instructions on removing the non-Flatpak version, see:
+<a href=\"https://github.com/flathub/com.fightcade.Fightcade#removing-other-fightcade-installs\">github.com/flathub/com.fightcade.Fightcade</a>"
+    fi
+fi
+
 . /app/bin/get-wine-prefix
 
 # Tell the user that the wine prefix may take some time to create.
