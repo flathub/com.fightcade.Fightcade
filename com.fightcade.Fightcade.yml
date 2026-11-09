@@ -113,6 +113,14 @@ modules:
       - ln -s /var/data/config/fcadefbneo/savestates emulator/fbneo/savestates
       # FBNeo saved overlays
       - ln -s /var/data/config/fcadefbneo/fightcade emulator/fbneo/fightcade
+      # FBNeo UI artwork (background, spectators and rank images): mods such as
+      # Fightcord's emulator skins replace these files, so they need to be writable.
+      - mv emulator/fbneo/ui emulator/fbneo/ui_orig
+      - ln -s /var/data/ui emulator/fbneo/ui
+      # Fightcade's mod folder. It loads resources/app/inject/inject.js at startup;
+      # mods (Fightcord and others) install their loader and modules there.
+      - rm -rf fc2-electron/resources/app/inject
+      - ln -s /var/data/inject fc2-electron/resources/app/inject
       # Snes9x config
       - ln -s /var/data/config/snes9x/fcadesnes9x.conf emulator/snes9x/fcadesnes9x.conf
       - rm -r emulator/snes9x/Saves

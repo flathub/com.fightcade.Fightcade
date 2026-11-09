@@ -63,6 +63,12 @@ mkdir -p ${DATADIR}/fbneo-training-mode
 cp -R /app/fightcade/Fightcade/emulator/fbneo/fbneo-training-mode-original/* ${DATADIR}/fbneo-training-mode/
 # FBNeo saved overlays
 mkdir -p ${DATADIR}/config/fcadefbneo/fightcade
+# FBNeo UI artwork: seed the writable copy from the files the emulator ships.
+# -n keeps themes installed by mods (Fightcord) across launches.
+mkdir -p ${DATADIR}/ui
+cp -Rn /app/fightcade/Fightcade/emulator/fbneo/ui_orig/. ${DATADIR}/ui/ 2> /dev/null
+# Fightcade's mod folder (resources/app/inject is a symlink to /var/data/inject)
+mkdir -p ${DATADIR}/inject
 # FBNeo: copy back in the save states the emulator ships with.
 mkdir -p ${DATADIR}/config/fcadefbneo/savestates
 cp -R /app/fightcade/Fightcade/emulator/fbneo/savestates_orig/* ${DATADIR}/config/fcadefbneo/savestates
