@@ -8,10 +8,9 @@ command: fightcade
 tags:
   - proprietary
 
-# Support 32-bit at runtime
+# Wine 26.08 runs 32-bit Windows programs through its WoW64 build, so the base no
+# longer exposes the i386 extension points; gecko and mono are still inherited.
 inherit-extensions:
-  - org.freedesktop.Platform.Compat.i386
-  - org.freedesktop.Platform.GL32
   - org.winehq.Wine.gecko
   - org.winehq.Wine.mono
 
